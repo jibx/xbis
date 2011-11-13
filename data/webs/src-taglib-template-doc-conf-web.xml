@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+  <description>
+    Documentation for the {display-name} custom tag library,
+    from the JAKARTA-TAGLIBS project.
+  </description>
+
+  <mime-mapping>
+    <extension>txt</extension>
+    <mime-type>text/plain</mime-type>
+  </mime-mapping>
+ 
+  <mime-mapping>
+    <extension>html</extension>
+    <mime-type>text/html</mime-type>
+  </mime-mapping>
+
+  <mime-mapping>
+    <extension>htm</extension>
+    <mime-type>text/html</mime-type>
+  </mime-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

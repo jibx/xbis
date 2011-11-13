@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+    <display-name>Scrape Tag Library</display-name>
+    <description>Tag library for scraping a page</description>
+    <taglib>
+        <taglib-uri>http://jakarta.apache.org/taglibs/scrape</taglib-uri>
+        <taglib-location>/WEB-INF/scrape.tld</taglib-location>
+    </taglib>
+</web-app>

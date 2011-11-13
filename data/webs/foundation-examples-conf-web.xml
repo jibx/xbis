@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+  <description>
+  Example web application illustrating the use of tags in the
+  "foundation" custom tag library, from the JAKARTA-TAGLIBS project.
+  </description>
+
+  <context-param>
+    <param-name>foo</param-name>
+    <param-value>bar</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>appName</param-name>
+    <param-value>APPLICATION</param-value>
+  </context-param>
+
+  <taglib>
+    <taglib-uri>http://jakarta.apache.org/taglibs/foundation-1.0</taglib-uri>
+    <taglib-location>/WEB-INF/foundation.tld</taglib-location>
+  </taglib>
+
+</web-app>

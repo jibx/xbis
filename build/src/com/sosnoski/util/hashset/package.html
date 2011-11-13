@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body>
+
+<p>Type-specific hash set collection classes. The classes in this
+package implement type-specific hash sets supporting a subset of
+the normal collection methods. The standard
+public access methods in these classes are as follows:</p>
+
+<center><table border="1" cellpadding="3" cellspacing="0">
+<tr bgcolor="#CCCCFF" class="TableHeadingColor"><td><font size="+1">Method Signature</font></td><td><font size="+1">From</font></td></tr>
+<tr><td><code>boolean <b>add</b>(<i>type)</code></td><td>implementation class</td></tr>
+<tr><td><code>void <b>clear</b>()</code></td><td>{@link com.sosnoski.util.PrimitiveHashBase} or {@link com.sosnoski.util.ObjectHashBase}</td></tr>
+<tr><td><code>Object <b>clone</b>()</code></td><td>implementation class</td></tr>
+<tr><td><code>boolean <b>contains</b>(<i>type</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>void <b>ensureCapacity</b>(int)</code></td><td>{@link com.sosnoski.util.PrimitiveHashBase} or {@link com.sosnoski.util.ObjectHashBase}</td></tr>
+<tr><td><code>Iterator <b>iterator</b>()</code></td><td>{@link com.sosnoski.util.hashset.ObjectSetBase} (not implemented for primitives)</td></tr>
+<tr><td><code>boolean <b>remove</b>(<i>type</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>int <b>size</b>()</code></td><td>{@link com.sosnoski.util.PrimitiveHashBase} or {@link com.sosnoski.util.ObjectHashBase}</td></tr>
+</table></center>
+
+<p>The access methods are
+unsynchronized for best performance. The user program must implement
+appropriate locking if multiple threads need to access an
+instance of these classes while that instance may be modified.</p>
+
+<p>Collections of a primitive type and of a specific object type
+are both supported. Hash sets of primitive types derive from the
+{@link com.sosnoski.util.hashset.PrimitiveSetBase} base class, and those of object types
+derive from the {@link com.sosnoski.util.hashset.ObjectSetBase}. To define a hash set of a
+new type, generally you can use one of the existing classes as a base
+and do a text substitution of the type names.</p>
+
+<p>This is generally not too useful for object types, since none of the methods
+return values of the type present in the table. The sample implementations include
+sets of <code>String</code>s as well as generic <code>Object</code>s, but there's really
+little reason to use anything other than the <code>Object</code> set in practice.</p>
+
+<p>Collections of object types may be configured to use any of three possible
+combinations of hash method and key comparison techniques. The choice is determined by an
+optional <code>tech</code> parameter to the constructor, with the following
+values inherited from {@link com.sosnoski.util.ObjectHashBase}:
+<ul>
+<li><code>STANDARD_HASH</code> - use object <code>hashCode()</code> and <code>equals()</code> comparison
+<li><code>IDENTITY_COMP</code> - use object <code>hashCode()</code> and <code>==</code> comparison
+<li><code>IDENTITY_HASH</code> - use <code>System.identityHashCode()</code> and <code>==</code> comparison
+</ul>
+In testing with the Sun Java 1.3.1 JVM <code>System.identityHashCode()</code> was found to be
+very slow in comparison to a typical <code>hashCode()</code> implementation, so be careful of using
+the <code>IDENTITY_HASH</code> option. <code>IDENTITY_COMP</code> is always faster than
+<code>STANDARD_HASH</code>, though, so it's a good choice when you know that objects are unique
+(such as <code>String</code>s which have been <code>intern</code>ed).</p>
+
+<p>Primitive types are more complicated to build. To implement a
+stack of a primitive type other than the included <code>int</code>,
+you're best off basing it on <code>DoubleHashSet.java</code>. If you're doing
+this for <code>long</code>, for instance, you'd need to first substitute
+"Long" for "Double", then "long" for "double" (<em>except</em> for the use of
+<code>double</code> as a parameter type for the first constructor - this needs
+to stay!). The last step is replacing the first part of the <code>computeSlot</code>
+method with an appropriate hash code computation for the target data type which
+results in an <code>int</code> value, which can then be converted into an
+initial index into the underlying array by the return statement of the method.</p>
+
+<p>If you work with primitive types you'll also
+need to define a hashing function (the <code>computeSlot</code> method in
+these classes). Selecting a good hash computation method for your data
+requires considerable research. The methods used in the provided code
+have not been subjected to any serious testing and may be flawed by poor
+distributions, which results in higher overhead for operations on the set.
+If you're using hash-based collections heavily, make sure the hashing method
+you choose works well with your data.</p>
+
+<p>Hash sets of both object and primitive types use considerably less memory than
+the corresponding standard Java library implementations, so a good approach to take
+when using these collections in high-performance applications is to be generous in
+setting the initial size for the table. It may also improve performance if you lower the
+<code>fill</code> parameter value, so that the table is expanded more often.</p>
+
+</body>
+</html>

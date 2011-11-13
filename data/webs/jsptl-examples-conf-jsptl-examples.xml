@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib>
+  <tlib-version>1.0 EA1</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <short-name>ex</short-name>
+
+  <tag>
+    <name>escapeHtml</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.EscapeHtmlTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <name>reader</name>
+        <required>false</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>  
+    <attribute>
+        <name>writer</name>
+        <required>false</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>  
+  </tag>
+
+  <tag>
+    <name>resource</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.ResourceTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <name>id</name>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+        <name>resource</name>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>  
+  </tag>
+
+  <tag>
+    <name>file</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.FileTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <name>id</name>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+        <name>file</name>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>  
+  </tag>
+
+  <tag>
+    <name>odd</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.OddTag</tag-class>
+    <body-content>JSP</body-content>
+  </tag>
+
+  <tag>
+    <name>even</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.EvenTag</tag-class>
+    <body-content>JSP</body-content>
+  </tag>
+
+  <tag>
+    <name>usCustomer</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.UsCustomerTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <name>customer</name>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>  
+    <attribute>
+        <name>var</name>
+        <required>false</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>  
+  </tag>
+
+  <tag>
+    <name>customerFmt</name>
+    <tag-class>org.apache.taglibs.jsptl.examples.taglib.CustomerFmtTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+        <name>customer</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+    <attribute>
+        <name>fmt</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>  
+  </tag>
+</taglib>

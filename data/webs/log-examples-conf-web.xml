@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>Log Taglib Sample</display-name>
+
+  <description>A sample web app demonstrating the Log TagLib</description>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <taglib>
+    <taglib-uri>http://jakarta.apache.org/taglibs/log-1.0</taglib-uri>
+    <taglib-location>/WEB-INF/log.tld</taglib-location>
+  </taglib>
+</web-app>

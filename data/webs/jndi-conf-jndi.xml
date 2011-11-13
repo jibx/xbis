@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- tag library descriptor for JNDI access tags-->
+
+<taglib>
+
+  <tlibversion>1.0</tlibversion>
+
+  <jspversion>1.1</jspversion>
+
+  <shortname>JNDI</shortname>
+
+  <uri>http://jakarta.apache.org/taglibs/jndi</uri>
+
+  <info>
+        A tag library for using the JNDI apis.
+  </info>
+
+  <tag>
+    <name>useContext</name>
+    <tagclass>org.apache.taglibs.jndi.UseContextTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.UseContextTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Create a javax.naming.Context object for use after tag close.</info>
+    <attribute>
+      <name>envRef</name>
+      <required>false</required> <!-- this or env or url required -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>env</name>
+      <required>false</required> <!-- this or envRef or url required -->
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>url</name>       
+      <required>false</required> <!-- this or envRef or env required -->
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>providerUrl</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>initialFactory</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>dnsUrl</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>authoritative</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>batchsize</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>objectFactories</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>stateFactories</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>urlPkgPrefixes</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required> <!-- page presumed if absent -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <tag>
+    <name>list</name>
+    <tagclass>org.apache.taglibs.jndi.ListTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.ListTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Lists the elements in a particular javax.naming.Context</info>
+    <attribute>
+      <name>contextRef</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>context</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>nameId</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>nameScope</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>classId</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>classScope</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>objId</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>objScope</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>nameObject</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>bindings</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <tag>
+    <name>lookup</name>
+    <tagclass>org.apache.taglibs.jndi.LookupTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.LookupTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Lookups and exports a particular entry in a javax.naming.Context</info>
+    <attribute>
+      <name>contextRef</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>context</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>nameObject</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>type</name>
+      <!-- the class to cast the looked up object to.  Right now failure to
+           cast results in a null return.  Adding an attribute failure with
+           string values null, exception, or classcast to return null, throw a 
+           JSPExceptionm or to re-throw the class-cast is a thought. -->
+      <required>false</required> 
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <tag>
+    <name>useDirContext</name>
+    <tagclass>org.apache.taglibs.jndi.UseDirContextTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.UseDirContextTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Create a javax.naming.directory.DirContext object for use after tag close.</info>
+    <attribute>
+      <name>envRef</name>
+      <required>false</required> <!-- this or env or url required -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>env</name>
+      <required>false</required> <!-- this or envRef or url required -->
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>url</name>       
+      <required>false</required> <!-- this or envRef or env required -->
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>providerUrl</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>initialFactory</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>dnsUrl</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>authoritative</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>batchsize</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>objectFactories</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>stateFactories</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>urlPkgPrefixes</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required> <!-- page presumed if absent -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+  
+  
+  <tag>
+    <name>search</name>
+    <tagclass>org.apache.taglibs.jndi.SearchTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.SearchTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Searches a DirContext.</info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required> <!-- page presumed if absent -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>contextRef</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>context</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>nameObject</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>filter</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>countLimit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>derefLink</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>attributes</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>attributesSeparator</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>bindings</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>searchScope</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>timeLimit</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <tag>
+    <name>getAttribute</name>
+    <tagclass>org.apache.taglibs.jndi.GetAttributeTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.GetAttributeTEI</teiclass>
+    <bodycontent>JSP</bodycontent> <!-- and will be the seperator for multi-value resposnes -->
+    <info>Extracts an attribute from a DirContext, a SearchResult, or an Attributes.</info>
+    <attribute>
+      <name>id</name>
+      <required>flase</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required> <!-- page presumed if absent -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ref</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>object</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>attribute</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>multivalue</name> <!-- either one, separator, or itterate -->
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>     
+
+  <tag>
+    <name>forEachAttribute</name>
+    <tagclass>org.apache.taglibs.jndi.ForEachAttributeTag</tagclass>
+    <teiclass>org.apache.taglibs.jndi.ForEachAttrtibuteTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Itterates attributes form a DirContext, Attributes, or SearchResult.</info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required> <!-- page presumed if absent -->
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ref</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>object</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>     
+
+</taglib>

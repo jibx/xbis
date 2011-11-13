@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+  <description>
+  Example web application illustrating the use of tags in the
+  DBTags custom tag library, from the JAKARTA-TAGLIBS project.
+  </description>
+  <taglib>
+    <taglib-uri>http://jakarta.apache.org/taglibs/dbtags</taglib-uri>
+    <taglib-location>/WEB-INF/dbtags.tld</taglib-location>
+  </taglib>
+  <security-role>
+    <role-name>admin</role-name>
+  </security-role>
+
+</web-app>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib> 
+	<!-- Version number of this taglib -->
+	<tlibversion>1.0</tlibversion>
+
+	<!-- The JSP specification version required to function -->
+	<jspversion>1.1</jspversion>
+
+	<!-- The short name of this tag library -->
+        <shortname>mailer</shortname>
+
+	<!-- Public URI that uniquely identifies this version of the tag library -->
+        <uri>http://jakarta.apache.org/taglibs/mailer-1.0</uri>
+
+	<!-- General information about this tag library -->
+        <info>
+	    This mailer tag library is used to send mail to people.  All of the
+	    variables (to, from, cc, bcc, and subject) can be set by
+	    their own tag so that they can be defined dynamically.
+	</info>
+
+	<!-- ******************** Defined Custom Tags ********************** -->
+	<tag>
+		<name>mail</name>
+		<tagclass>org.apache.taglibs.mailer.MailTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Construct an email message</info>
+
+		<attribute>
+			<name>to</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>replyTo</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>from</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cc</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>bcc</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>subject</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+                <attribute>
+                        <name>server</name>
+                        <required>false</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+                 <attribute>
+                        <name>session</name>
+                        <required>false</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+                <attribute>
+                        <name>mimeMessage</name>
+                        <required>false</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+                <attribute>
+                        <name>authentication</name>
+                        <required>false</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+	</tag>
+  	<tag>
+       		<name>header</name>
+       		<tagclass>org.apache.taglibs.mailer.HeaderTag</tagclass>
+       		<bodycontent>JSP</bodycontent>
+       		<info>Set the To address of the email</info>
+ 
+       		<attribute>
+      	        	<name>name</name>
+ 			<required>true</required>
+       			<rtexprvalue>false</rtexprvalue>
+       		</attribute>
+       		<attribute>
+       			<name>value</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+       		</attribute>
+ 	</tag>
+	<tag>
+		<name>addto</name>
+		<tagclass>org.apache.taglibs.mailer.AddToTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Append a To address to the list of to addresses in the email</info>
+	</tag>
+	<tag>
+		<name>setto</name>
+		<tagclass>org.apache.taglibs.mailer.SetToTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the To address of the email</info>
+	</tag>
+	<tag>
+		<name>replyto</name>
+		<tagclass>org.apache.taglibs.mailer.ReplyToTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the Reply-To address of the email</info>
+	</tag>
+	<tag>
+		<name>from</name>
+		<tagclass>org.apache.taglibs.mailer.FromTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the From address of the email</info>
+	</tag>
+	<tag>
+		<name>addcc</name>
+		<tagclass>org.apache.taglibs.mailer.AddCcTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Append a Cc address to the list of cc addresses in the email</info>
+	</tag>
+	<tag>
+		<name>setcc</name>
+		<tagclass>org.apache.taglibs.mailer.SetCcTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the Cc address of the email</info>
+	</tag>
+	<tag>
+		<name>addbcc</name>
+		<tagclass>org.apache.taglibs.mailer.AddBccTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Append a Bcc address to the list of bcc addresses in the email</info>
+	</tag>
+	<tag>
+		<name>setbcc</name>
+		<tagclass>org.apache.taglibs.mailer.SetBccTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the Bcc address of the email</info>
+	</tag>
+	<tag>
+		<name>subject</name>
+		<tagclass>org.apache.taglibs.mailer.SubjectTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the subject of the email</info>
+	</tag>
+<!-- Added by Jayson Falkner 5/8/2001 -->
+	<tag>
+	        <name>attach</name>
+		<tagclass>org.apache.taglibs.mailer.AttachTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Adds attachments to an email.</info>
+
+       		<attribute>
+      	        	<name>file</name>
+ 			<required>false</required>
+       			<rtexprvalue>false</rtexprvalue>
+       		</attribute>
+       		<attribute>
+       			<name>url</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+       		</attribute>
+                <attribute>
+                        <name>type</name>
+                        <required>false</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+ 	</tag>
+<!-- end added by Jayson Falkner - 5/8/2001 -->
+	<tag>
+	        <name>message</name>
+		<tagclass>org.apache.taglibs.mailer.MessageTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the Message of the email</info>
+
+                <attribute>
+                        <name>type</name>
+                        <required>false</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+ 	</tag>
+	<tag>
+	        <name>send</name>
+		<tagclass>org.apache.taglibs.mailer.SendTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Send the email</info>
+ 	</tag>
+	<tag>
+         	<name>error</name>
+ 	  	<tagclass>org.apache.taglibs.mailer.ErrorTag</tagclass>
+ 	  	<teiclass>org.apache.taglibs.mailer.ErrorTEI</teiclass>
+ 	  	<bodycontent>JSP</bodycontent>
+ 	  	<info>Get the error message if email could not be sent</info>
+
+                <attribute>
+                        <name>id</name>
+                        <required>true</required>
+                        <rtexprvalue>false</rtexprvalue>
+                </attribute>
+ 	</tag>
+</taglib>
+

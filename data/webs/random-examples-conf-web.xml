@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+    <display-name>Random Tag Library</display-name>
+    <description>
+	Example web application illustrating the use of tags in the "random" custom
+	tag library for creating a random string or number, from the
+	JAKARTA-TAGLIBS project.
+    </description>
+    <welcome-file-list>
+	<welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+    </welcome-file-list>
+
+    <taglib>
+        <taglib-uri>http://jakarta.apache.org/taglibs/random-1.0</taglib-uri>
+        <taglib-location>/WEB-INF/random.tld</taglib-location>
+    </taglib>
+
+</web-app>

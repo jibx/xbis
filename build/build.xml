@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+
+<!-- ===================================================================
+
+Ant build file for XBIS programs.
+
+=================================================================== -->
+
+<project name="XBIS" default="main" basedir="..">
+
+  <!-- The directories -->
+  <property name="root" value="${basedir}"/>
+  <property name="build" value="${basedir}/build"/>
+  <property name="src" value="${build}/src"/>
+  <property name="dest" value="${build}/classes"/>
+  <property name="testdest" value="${basedir}/tests"/>
+  <property name="docs" value="${root}/docs/api"/>
+  <property name="data" value="${build}/data"/>
+  <property name="lib" value="${basedir}/lib"/>
+
+  <!-- Other definitions -->
+  <property name="project" value="XML Binary Infoset"/>
+  <property name="jarprefix" value="xbis"/>
+  <property name="fullname" value="fullxbis"/>
+  <property name="packages" value="test,org.xbis,org.xbis.eventstore"/>
+
+  <!-- Delete existing test class files -->
+  <target name="clean-test">
+    <mkdir dir="${testdest}"/>
+    <delete>
+      <fileset dir="${testdest}" includes="**/*.class"/>
+    </delete>
+  </target>
+
+  <!-- Compile for SAX2 -->
+  <target name="compile-sax">
+    <mkdir dir="${dest}"/>
+    <delete>
+      <fileset dir="${dest}" includes="**/*.class"/>
+    </delete>
+    <javac srcdir="${src}"
+		  destdir="${dest}"
+      target="1.3"
+      source="1.3"
+		  optimize="off"
+      debug="on"
+		  deprecation="on"
+      includes="org/**/*.java,com/**/*.java"
+      excludes="**/*Jibx*.java"
+      classpath="${dest}:${lib}/xercesImpl.jar:${lib}/xmlParserAPIs.jar:${lib}/jdom.jar:${lib}/jibx-run.jar"
+   />
+    <javac srcdir="${src}"
+		  destdir="${testdest}"
+      target="1.3"
+      source="1.3"
+		  optimize="off"
+      debug="on"
+		  deprecation="on"
+      includes="test/*.java"
+      classpath="${dest}:${lib}/xercesImpl.jar:${lib}/xmlParserAPIs.jar:${lib}/jdom.jar"
+   />
+  </target>
+
+  <!-- Compile for JiBX -->
+  <target name="compile-jibx">
+    <mkdir dir="${dest}"/>
+    <delete>
+      <fileset dir="${dest}" includes="**/*.class"/>
+    </delete>
+    <javac srcdir="${src}"
+		  destdir="${dest}"
+      target="1.3"
+      source="1.3"
+		  optimize="off"
+      debug="on"
+		  deprecation="on"
+      includes="org/**/*.java,com/**/*.java"
+      excludes="**/*SAX*.java,**/eventstore/**/*.java"
+      classpath="${dest}:${lib}/jibx-run.jar"
+   />
+  </target>
+
+  <!-- Build the javadocs -->
+  <target name="javadoc">
+    <mkdir dir="${docs}"/>
+    <javadoc
+      packagenames="${packages}"
+      sourcepath="${src}"
+      destdir="${docs}"
+      author="true"
+      version="true"
+      noindex="true"
+		  nohelp="true"
+		  notree="true"
+      windowtitle="${project}"
+      doctitle="${project}"
+      bottom="&lt;table width='80%%'&gt;&lt;tr&gt;&lt;td width='50%%'&gt;&lt;p align='center'&gt;&lt;a href='http://www.sosnoski.com/' target='_top'&gt;&lt;font size='3'&gt;&lt;b&gt;Company Web Site&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;td width='50%%'&gt;&lt;p align='center'&gt;&lt;a href='http://www.xbis.org' target='_top'&gt;&lt;font size='3'&gt;&lt;b&gt;XML Binary Information Set Home&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"
+      classpath="${dest}"
+    >
+	  </javadoc>
+  </target>
+
+  <!-- Build the SAX2 class file jar -->
+  <target name="jar-sax" depends="compile-sax">
+    <delete file="${basedir}/sax${jarprefix}.jar" quiet="true"/>
+	  <jar jarfile="${basedir}/sax${jarprefix}.jar" basedir="${dest}"/>
+  </target>
+
+  <!-- Build the JiBX class file jar -->
+  <target name="jar-jibx" depends="compile-jibx">
+    <delete file="${basedir}/${jarprefix}-jibx.jar" quiet="true"/>
+	  <jar jarfile="${basedir}/${jarprefix}-jibx.jar" basedir="${dest}"/>
+  </target>
+
+  <!-- Build the full distribution jar -->
+  <target name="package" depends="jar-sax">
+	  <delete file="${root}/${fullname}.zip" quiet="true"/>
+    <zip zipfile="${root}/${fullname}.zip">
+      <fileset dir="${root}/.." includes="xbis/**/*" excludes="**/*.txt,**/xml.xml,**/.*,**/*.launch,**/*.zip,**/build/classes/**,**/build/docs/**,**/.*"/>
+    </zip>
+  </target>
+
+  <target name="sax" depends="clean-test,compile-sax,jar-sax"/>
+  <target name="jibx" depends="clean-test,compile-jibx,jar-jibx"/>
+  <target name="main" depends="clean-test,compile-sax,jar-sax,compile-jibx,jar-jibx,javadoc,package"/>
+
+</project>

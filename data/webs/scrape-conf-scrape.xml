@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib> 
+	<tlibversion>1.0</tlibversion> <jspversion>1.1</jspversion>
+        <shortname>scrp</shortname>
+        <uri>http://kinetic.more.net/taglibs/scrape</uri>
+        <info>
+	    This scrape tag library is used to scrape or extract parts from
+	    other web pages and use them in web pages created by the user of
+	    this tag library.
+	</info>
+
+	<tag>
+		<name>page</name>
+		<tagclass>org.apache.taglibs.scrape.PageTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>Set the page that will be scraped</info>
+
+		<attribute>
+			<name>url</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>time</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>scrape</name>
+		<tagclass>org.apache.taglibs.scrape.ScrapeTag</tagclass>
+		<bodycontent>empty</bodycontent>
+		<info>
+		    Does the scraping of the page named in the parent page tag
+		</info>
+
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>begin</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>end</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>strip</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>anchors</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>result</name>
+		<tagclass>org.apache.taglibs.scrape.ResultTag</tagclass>
+		<bodycontent>empty</bodycontent>
+		<info>Get the HTML extracted by the scrape of a page</info>
+
+		<attribute>
+			<name>scrape</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>		
+	<tag>
+		<name>url</name>
+		<tagclass>org.apache.taglibs.scrape.UrlTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>
+		      Does the scraping of the page named in the parent page tag
+		</info>
+	</tag>
+</taglib>

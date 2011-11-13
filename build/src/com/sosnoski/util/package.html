@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body>
+
+<p>Base classes and general utility classes. These include the abstract base classes for
+the several varieties of type-specific collection classes.</p>
+
+<p>{@link com.sosnoski.util.GrowableBase} provides the basic implementation of a collection
+which uses a growable array, with call out methods (abstract methods used by the
+base class but defined by the subclass) for handling the particular needs of each
+such type of collection. The array, queue, and stack collection classes are
+all derived from this class.</p>
+
+<p>{@link com.sosnoski.util.PrimitiveHashBase} and {@link com.sosnoski.util.ObjectHashBase} provide the
+basic implementation of hash-based collection. These also use call out methods
+for handling the particular needs of each
+such type of collection. The hash map and hash set collection classes are
+derived from this pair of classes.</p>
+
+<p>{@link com.sosnoski.util.ArrayRangeIterator}, {@link com.sosnoski.util.WrappedArrayIterator} and
+{@link com.sosnoski.util.SparseArrayIterator} provide <code>java.util.Iterator</code> implementations
+for array-based collections. They're used by the collections classes to return iterators for
+object collections, but can also be used directly by applications.</p>
+
+<p>{@link com.sosnoski.util.CharBuffer} supports working with character
+sequences (including arrays and <code>String</code>s) as a lightweight
+<code>StringBuffer</code> workalike. It extends the {@link com.sosnoski.util.array.CharArray}
+growable character array implementation with added support for append/insert/replace
+operations on the character sequence, along with comparing various types of
+character sequences and computing format-independent hash codes for character
+sequences.</p>
+
+</body>
+</html>

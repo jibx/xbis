@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+    <display-name>Mailer Tag Library</display-name>
+    <description>
+	Example web application illustrating the use of tag in the "mailer"
+	custom tag library for sending mail, from the JAKARTA-TAGLIBS project.
+    </description>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+    </welcome-file-list>
+    <taglib>
+        <taglib-uri>http://jakarta.apache.org/taglibs/mailer-1.0</taglib-uri>
+        <taglib-location>/WEB-INF/mailer.tld</taglib-location>
+    </taglib>
+
+</web-app>

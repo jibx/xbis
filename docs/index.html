@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>XBIS XML Information Set Encoding</title>
+      <style type="text/css">
+        @import url("./style/tigris.css");
+        @import url("./style/maven.css");
+    .dtd-comment {
+      color: #993399;
+      font-weight: bold;
+      </style>
+      <script type="text/javascript">
+        if (document.layers) {
+          document.writeln('<link rel="stylesheet" type="text/css" href="./style/ns4_only.css" media="screen" /><link rel="stylesheet" type="text/css" href="./style/maven_ns4_only.css" media="screen" />')
+        }
+      </script>
+      <link rel="stylesheet" type="text/css" href="./style/print.css" media="print" />
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body class="composite">
+<div id="banner">
+<table border="0" cellspacing="0" cellpadding="8" width="100%">
+  <tbody>
+    <tr>
+      <td><h1>XBIS XML Information Set Encoding</h1>
+      </td>
+      <td>
+      <div align="right" id="login"><a href="http://sourceforge.net">
+      <img src="http://sourceforge.net/sflogo.php?group_id=69358&amp;type=5"
+        width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div id="breadcrumbs">
+<table border="0" cellspacing="0" cellpadding="4" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <div align="right"><a href="http://www.xbis.org">Home Page</a> | <a href="http://www.sourceforge.net/projects/xbis/">SourceForge
+Project Page</a> | <a href="http://sourceforge.net/mail/?group_id=77740">Mailing Lists</a> | <a
+ href="http://sourceforge.net/project/showfiles.php?group_id=77740">Downloads</a> </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table border="0" cellspacing="0" cellpadding="8" width="100%" id="main">
+  <tbody>
+	<tr valign="top">
+	  <td id="leftcol" width="20%">
+		<div id="navcolumn">
+
+
+                <div>
+            <strong>XBIS Home</strong>
+                              <div>
+            <small>
+                    <span class="menu-selection">Introduction</span>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="format.html">Format</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="performance.html">Performance</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="status.html">Status</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="./api/index.html">JavaDocs</a>
+                  </small>
+                </div>
+                      </div>
+      
+        </div>
+      </td>
+      <td>
+
+
+
+
+
+<P STYLE="margin-bottom: 0cm">XBIS is an encoding format for XML
+documents that is fully convertible to and from text, with information
+set equivalence between the original document text and regenerated
+document text. It's intended for use in transmitting XML documents
+between application components, and is therefore designed for
+processing speed. The current Java language implementation offers
+several times the performance of SAX2 parsers working from text
+documents across a wide range of document types and sizes, and across
+JVMs tested, while also providing a substantial reduction in document
+size for most types of XML documents.</P>
+
+<P STYLE="margin-bottom: 0cm">XBIS is the successor to the XML Stream
+(XMLS) project which was developed in 2000-2001 to address the issue
+of processing overhead when sending XML documents between application
+components. The XMLS implementation was designed for use with
+document models, so it took a document model as input and generated a
+document model as output. Even though it demonstrated much better
+performance than alternatives such as Java serialization, or
+conversion to and from text, it offered no direct performance
+comparison to parsing XML text because of its document-model focus.</P>
+
+<P STYLE="margin-bottom: 0cm">The XBIS format is very similar to that used
+by XMLS, with only a few differences. The main difference from XMLS is in
+the internal details of the implementation, which has been restructured to
+provide better support for working with parser event streams as input and
+output. The current XBIS implementation uses a SAX2 event stream as input
+in order to generate the binary encoding of a document, and generates a
+SAX2 event stream as output when decoding the binary representation. Other
+parser APIs are likely to be supported in the future, along with direct
+conversion to and from document model representations of documents.</P>
+
+<p STYLE="margin-bottom: 0cm">Even though both XMLS and XBIS are designed
+around the needs of Java applications, the XBIS format is a general one that
+can be implemented in any general purpose programming language. The encoding
+format is based on long-established computing principles and has no known
+"intellectual property" encumberances. This format is made available to any
+interested parties free of restriction. The Java implementation code itself
+uses the commercial-friendly BSD license.</p>
+
+<P STYLE="margin-bottom: 0cm">The main features that distinguish XBIS
+from other techniques for representing XML documents are:</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0cm">Full
+	convertibility of arbitrary XML documents to and from text
+	representation (all XML information content preserved),</P>
+	<LI><P STYLE="margin-bottom: 0cm">On-the-fly conversion in both
+	directions, so that output can begin as soon as the first input is
+	received,</P>
+	<LI><P STYLE="margin-bottom: 0cm">Very high performance in terms of
+	CPU usage, along with a modest reduction in document sizes,</P>
+	<LI><P STYLE="margin-bottom: 0cm">Streaming of documents with some
+	state information retained between documents, allowing even further
+	performance improvements and size reductions,</P>
+	<LI><P STYLE="margin-bottom: 0cm">Potential for additional
+	optimizations by the application generating XBIS which will work
+	without any special programming for the application
+	receiving XBIS.</P>
+</OL>
+
+<p STYLE="margin-bottom: 0cm">The current version of XBIS is designed to
+preserve the canonical form of text XML documents converted to and from XBIS.
+This represents somewhat of a change in direction from earlier versions which
+focused more on the XML Infoset. The reason for this change is that the Infoset
+is an abstraction with very little direct application, while canonicalization is
+a practical concern for many usages of XML (including XML Signature). This
+change of focus has had very little direct impact on the XBIS format and
+implementation. It has, however, eliminated the need to extend XBIS with support
+for some rarely used aspects of the Infoset.</p>
+
+<p STYLE="margin-bottom: 0cm">Check out the XBIS <a href="format.html">encoding format</a>
+and some information on the <a href="performance.html">performance tests</a> on this
+site. The latest performance results are included in the article <a
+href="http://www-106.ibm.com/developerworks/xml/library/x-trans2/">Improve
+XML transport performance, Part 2</a> at IBM developerWorks.</p>
+
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div id="footer">
+<table border="0" cellspacing="0" cellpadding="4">
+  <tbody>
+    <tr>
+      <td> &copy; 2003-2004, Dennis M. Sosnoski (<a href="http://www.sosnoski.com">Sosnoski Software Solutions, Inc.</a>).
+      Licensed to the XBIS Project for free distribution and use. </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+</body>
+</html>

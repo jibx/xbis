@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+  <description>
+  Example web application illustrating the use of tags in the
+  "i18n" custom tag library, from the JAKARTA-TAGLIBS project.
+  </description>
+
+  <taglib>
+    <taglib-uri>http://jakarta.apache.org/taglibs/i18n-1.0</taglib-uri>
+    <taglib-location>/WEB-INF/i18n.tld</taglib-location>
+  </taglib>
+
+</web-app>

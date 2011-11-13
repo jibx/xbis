@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body>
+
+<p>Type-specific hash map collections. The classes in this
+package are basically equivalent to somewhat simplified and
+type-specific versions of the
+standard <code>java.util.Hashmap</code> or newer
+<code>java.util.HashMap</code> class. They generally
+use the method names defined by <code>HashMap</code> as opposed
+to the older <code>Hashmap</code> names. The standard
+public access methods in these classes are as follows:</p>
+
+<center><table border="1" cellpadding="3" cellspacing="0">
+<tr bgcolor="#CCCCFF" class="TableHeadingColor"><td><font size="+1">Method Signature</font></td><td><font size="+1">From</font></td></tr>
+<tr><td><code><i>type2</i> <b>add</b>(<i>type1</i>, <i>type2</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>void <b>clear</b>()</code></td><td>{@link com.sosnoski.util.hashmap.PrimitiveKeyBase} or {@link com.sosnoski.util.hashmap.ObjectKeyBase}</td></tr>
+<tr><td><code>Object <b>clone</b>()</code></td><td>implementation class</td></tr>
+<tr><td><code>boolean <b>containsKey</b>(<i>type1</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>void <b>ensureCapacity</b>(int)</code></td><td>{@link com.sosnoski.util.PrimitiveHashBase} or {@link com.sosnoski.util.ObjectHashBase}</td></tr>
+<tr><td><code><i>type2</i> <b>get</b>(<i>type1</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>Iterator <b>iterator</b>()</code></td><td>{@link com.sosnoski.util.hashmap.ObjectKeyBase} (not implemented for primitive keys)</td></tr>
+<tr><td><code><i>type2</i> <b>remove</b>(<i>type1</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>int <b>size</b>()</code></td><td>{@link com.sosnoski.util.PrimitiveHashBase} or {@link com.sosnoski.util.ObjectHashBase}</td></tr>
+<tr><td><code>Iterator <b>valueIterator</b>()</code></td><td>implementation class (not implemented for primitive values)</td></tr>
+</table></center>
+
+<p>As with <code>HashMap</code>, the access methods are
+unsynchronized for best performance. The user program must implement
+appropriate locking if multiple threads need to access an
+instance of these classes while that instance may be modified.</p>
+
+<p>Maps may use either a primitive type or an object type as
+both keys and values. Two separate base classes are defined for
+different classes of maps: {@link com.sosnoski.util.hashmap.PrimitiveKeyBase} for maps
+with keys of primitive types, and {@link com.sosnoski.util.hashmap.ObjectKeyBase} for maps
+with object keys.</p>
+
+<p>Collections of object types may be configured to use any of three possible
+combinations of hash method and key comparison techniques. The choice is determined by an
+optional <code>tech</code> parameter to the constructor, with the following
+values inherited from {@link com.sosnoski.util.ObjectHashBase}:
+<ul>
+<li><code>STANDARD_HASH</code> - use object <code>hashCode()</code> and <code>equals()</code> comparison
+<li><code>IDENTITY_COMP</code> - use object <code>hashCode()</code> and <code>==</code> comparison
+<li><code>IDENTITY_HASH</code> - use <code>System.identityHashCode()</code> and <code>==</code> comparison
+</ul>
+In testing with the Sun Java 1.3.1 JVM <code>System.identityHashCode()</code> turns out to be
+very slow in comparison to a typical <code>hashCode()</code> implementation, so be careful of using
+the <code>IDENTITY_HASH</code> option. <code>IDENTITY_COMP</code> is always faster than
+<code>STANDARD_HASH</code>, though, so it's a good choice when you know that objects are unique
+(such as <code>String</code>s which have been <code>intern</code>ed).</p>
+
+<p>To define a hash map of a new type, derive from the appropriate
+base class and define the necessary implementation methods. A pair
+of useful hash map classes which can be used as model code for new
+variations are included in the package, {@link com.sosnoski.util.hashmap.IntStringHashMap}
+(mapping <code>int</code> keys to <code>String</code> values) and
+{@link com.sosnoski.util.hashmap.StringIntHashMap} (mapping <code>String</code> keys to
+<code>int</code> values). The source for these can be copied and
+renamed as appropriate, then text substitutions used to
+change the types (with some care in the case of "int", since this
+type is used internally as well as for the keys or values).</p>
+
+<p>Before launching into this, you may want to look at the
+{@link com.sosnoski.util.hashset} package, which provides a
+simpler view based on much of the same underlying code. That package
+also contains a few more examples, including one for <code>double</code>
+primitive keys.</p>
+
+<p>Defining new hash map classes is generally not too useful for different types of object
+keys, since none of the methods return keys. It is necessary for working with primitive
+types as either keys or values (other than the combinations supplied), though, and can
+also be worthwhile for different object value types.</p>
+
+<p>If you work with primitive types as keys you'll also
+need to define a hashing function (the <code>computeSlot</code> method in
+these classes). Selecting a good hash computation method for your data
+requires considerable research. The methods used in the provided code
+have not been subjected to any serious testing and may be flawed by poor
+distributions, which results in higher overhead for operations on the set.
+If you're using hash-based collections heavily, make sure the hashing method
+you choose works well with your data.</p>
+
+<p>Hash maps of both object and primitive types use considerably less memory than
+the corresponding standard Java library implementations, so a good approach to take
+when using these collections in high-performance applications is to be generous in
+setting the initial size for the tables. It may also improve performance if you lower the
+<code>fill</code> parameter value, so that the tables are expanded more often.</p>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- a tab library descriptor -->
+
+<taglib>
+  <!-- after this the default space is
+        "http://java.sun.com/j2ee/dtds/jsptaglibrary_1_2.dtd"
+   -->
+
+  <tlibversion>2.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>BSF JSP Support</shortname>
+  <uri>http://jakarta.apache.org/taglibs/bsf-2.0</uri>
+  <info> Just testing </info>
+
+  <tag>
+    <name>scriptlet</name>
+    <tagclass>bsf.scriptlet</tagclass>
+    <bodycontent>tagdependent</bodycontent>
+    <info>Run script</info>
+    <attribute>
+      <name>language</name>
+      <required>true</required>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>expression</name>
+    <tagclass>bsf.expression</tagclass>
+    <bodycontent>tagdependent</bodycontent>
+    <info>Run expression</info>
+    <attribute>
+      <name>language</name>
+      <required>true</required>
+    </attribute>
+  </tag>
+
+</taglib>

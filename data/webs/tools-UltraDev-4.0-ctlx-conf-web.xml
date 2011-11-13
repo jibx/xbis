@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+    <servlet>
+        <servlet-name>
+            TLDParser
+        </servlet-name>
+        <servlet-class>
+            org.apache.taglibs.tools.ultradev.ctlx.TLDParser
+        </servlet-class>
+    </servlet>
+
+</web-app>

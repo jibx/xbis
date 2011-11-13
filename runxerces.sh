@@ -1,0 +1,2 @@
+#java -Xms384M -Xmx384M -cp tests:saxxbis.jar:lib/xercesImpl.jar -Dorg.xml.sax.driver=org.apache.xerces.parsers.SAXParser test.RunTest $1 data/periodic.xml data/soap.xml data/xml.xml data/weblog.xml data/factbook.xml data/ants data/fms data/soaps data/webs
+java -Xms384M -Xmx384M -server -cp tests:saxxbis.jar:lib/xercesImpl.jar -Dorg.xml.sax.driver=org.apache.xerces.parsers.SAXParser test.RunTest $1 data/periodic.xml data/soap.xml data/weblog.xml data/factbook.xml data/ants data/fms data/soaps data/webs

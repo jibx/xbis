@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body>
+
+<p>Type-specific stack collection classes. The classes in this
+package implement type-specific stacks based on growable
+arrays. They support a subset of the normal collection methods, as
+well as appropriate stack methods. The standard public access
+methods in these classes are as follows:</p>
+
+<center><table border="1" cellpadding="3" cellspacing="0">
+<tr bgcolor="#CCCCFF" class="TableHeadingColor"><td><font size="+1">Method Signature</font></td><td><font size="+1">From</font></td></tr>
+<tr><td><code>void <b>clear</b>()</code></td><td>{@link com.sosnoski.util.stack.StackBase}</td></tr>
+<tr><td><code>Object <b>clone</b>()</code></td><td>implementation class</td></tr>
+<tr><td><code>void <b>ensureCapacity</b>(int)</code></td><td>{@link com.sosnoski.util.GrowableBase}</td></tr>
+<tr><td><code>boolean <b>isEmpty</b>()</code></td><td>{@link com.sosnoski.util.stack.StackBase}</td></tr>
+<tr><td><code><i>type</i> <b>peek</b>()</code></td><td>implementation class</td></tr>
+<tr><td><code><i>type</i> <b>peek</b>(int)</code></td><td>implementation class</td></tr>
+<tr><td><code><i>type</i> <b>pop</b>()</code></td><td>implementation class</td></tr>
+<tr><td><code><i>type</i> <b>pop</b>(int)</code></td><td>implementation class</td></tr>
+<tr><td><code>void <b>push</b>(<i>type</i>)</code></td><td>implementation class</td></tr>
+<tr><td><code>int <b>size</b>()</code></td><td>{@link com.sosnoski.util.stack.StackBase}</td></tr>
+<tr><td><code><i>type[]</i> <b>toArray</b>()</code></td><td>implementation class</td></tr>
+</table></center>
+
+<p>The access methods are 
+unsynchronized for best performance. The user program must implement
+appropriate locking if multiple threads need to access an
+instance of these classes while that instance may be modified.</p>
+
+<p>Collections of a primitive type and of a specific object type
+are both supported. All variations derive directly from the 
+{@link com.sosnoski.util.stack.StackBase} base class. To define a stack of a
+new type, generally you can use one of the existing classes as a base
+and do a text substitution of the type names.</p>
+
+<p>For instance, to define a stack of instances of 
+<code>Thread</code> just copy <code>StringStack.java</code> 
+to a new file named <code>ThreadStack.java</code>, then do a global 
+text substitution of &quot;Thread&quot; for &quot;String&quot; in the 
+new file.</p>
+
+<p>Primitive types are only slightly more complicated. To implement a
+stack of a primitive type other than the included <code>int</code>, 
+you're best off basing it on <code>StringStack.java</code>. If you're doing 
+this for <code>double</code>, for instance, you'd need to first substitute
+"DoubleStack" for "StringStack", then "double" for "String". The last step is deleting
+the "m_baseArray[m_countPresent] = null;" line within the <code>pop</code> 
+method,which is not needed for primitive types.</p>
+
+</body>
+</html>

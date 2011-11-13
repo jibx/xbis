@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- a tag library descriptor -->
+
+<taglib>
+  <!-- after this the default space is
+	"http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd"
+   -->
+
+  <!-- The version number of this tag library -->
+  <tlibversion>1.0</tlibversion>
+
+  <!-- The JSP specification version required to function -->
+  <jspversion>1.1</jspversion>
+
+  <!-- The short name of this tag library -->
+  <shortname>foundation</shortname>
+
+  <!-- Public URI that uniquely identifies this version of the tag library -->
+  <uri>http://jakarta.apache.org/taglibs/foundation</uri>
+
+  <!-- General information about this tag library -->
+  <info>
+    The Foundation custom tag library contains tags which can be used to
+    store and manipulate native java types such as Boolean, Integer,
+    Long, Float, etc. instead of using them within a JSP page as a String.
+    This tag library can support other tag libraries if they define a
+    BeanInfo for the beans and script variables.  Special BeanInfo methods
+    can be defined that allow other beans and script variables to interoperate
+    with this tag libraries tags.
+  </info>
+
+  <!-- ******************** Defined Custom Tags *************************** -->
+
+  <!-- Default Object Data Types -->
+
+  <tag>
+    <name>array</name>   
+    <tagclass>org.apache.taglibs.foundation.data.ArrayTag</tagclass>   
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new Array object.               
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>size</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>boolean</name>
+    <tagclass>org.apache.taglibs.foundation.data.BooleanTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new Boolean object from an object,
+      object property, body of tag, or default value.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>default</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>date</name>
+    <tagclass>org.apache.taglibs.foundation.date.DateTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new Date object.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>obj</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>timezone</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>locale</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>parse</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>format</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>map</name>
+    <tagclass>org.apache.taglibs.foundation.data.MapTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new Map object.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>cookie</name>
+    <tagclass>org.apache.taglibs.foundation.cookie.CookieTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new Cookie object that can be sent back to user.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>value</name> 
+      <required>false</required> 
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>comment</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>domain</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>path</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>maxAge</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>secure</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute> 
+      <name>version</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>number</name>
+    <tagclass>org.apache.taglibs.foundation.data.NumberTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new Number object from an object,
+      object property, body of tag, or default value.
+    </info>
+    <attribute>
+      <name>id</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    <attribute>
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    <attribute>
+      <name>default</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <tag>
+    <name>text</name>
+    <tagclass>org.apache.taglibs.foundation.data.TextTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Create a new text String object from an object,
+      object property, body of tag, or default value.
+    </info>
+    <attribute>
+      <name>id</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    <attribute>
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    <attribute>
+      <name>default</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <!-- Object Data Tags -->
+
+  <tag>
+    <name>cookieValues</name>
+    <tagclass>org.apache.taglibs.foundation.cookie.CookieValuesTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the Cookie
+      names and values.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>cookieObjects</name>
+    <tagclass>org.apache.taglibs.foundation.cookie.CookieObjectsTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the Cookie
+      names and Cookie data object.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>header</name>
+    <tagclass>org.apache.taglibs.foundation.header.HeaderTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the HTTP Header
+      names and first value.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>headers</name>
+    <tagclass>org.apache.taglibs.foundation.header.HeadersTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the HTTP Header
+      names and a value Array.
+    </info>    
+    <attribute>
+      <name>id</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>initParameters</name>
+    <tagclass>org.apache.taglibs.foundation.misc.InitParametersTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the web application
+      context init parameter names and value.
+    </info>
+    <attribute> 
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>                 
+    
+  <tag>
+    <name>parameter</name>
+    <tagclass>org.apache.taglibs.foundation.parameter.ParameterTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the HTML form input
+      parameter names and first value.
+    </info>    
+    <attribute>
+      <name>id</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>  
+
+  <tag>
+    <name>parameters</name>
+    <tagclass>org.apache.taglibs.foundation.parameter.ParametersTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Map Script Variable with all the HTML form input
+      parameter names and a value Array.
+    </info>   
+    <attribute>
+      <name>id</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+  </tag>
+
+  <tag>
+    <name>request</name>
+    <tagclass>org.apache.taglibs.foundation.request.RequestTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Script Variable for the HTTP Request data object.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>response</name>
+    <tagclass>org.apache.taglibs.foundation.response.ResponseTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Script Variable for the HTTP Response data object.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue> 
+    </attribute> 
+  </tag>
+
+  <tag>
+    <name>session</name>
+    <tagclass>org.apache.taglibs.foundation.session.SessionTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Initializes a Script Variable for the HTTP Session data object.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- Object manipulation tags -->
+
+  <tag>
+    <name>addArray</name>
+    <tagclass>org.apache.taglibs.foundation.object.AddArrayTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Add a new object to the end of an Array. If there is no
+      obj attribute, the body of the tag will be added to the
+      array as a string.
+    </info>
+    <attribute>
+      <name>array</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>attributes</name>
+    <tagclass>org.apache.taglibs.foundation.object.AttributesTag</tagclass>
+    <bodycontent>None</bodycontent>
+    <info>
+      Create a Map Script Variable with all the attribute
+      names and attribute data object for the Page, Request, Session,
+      or Application scope.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>print</name>
+    <tagclass>org.apache.taglibs.foundation.print.PrintTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>Prints the value of an object or object property.</info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>printFilter</name>
+    <tagclass>org.apache.taglibs.foundation.print.PrintFilterTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+     Prints the value of an object or object property with the HTML tags
+     filtered for display.  All '&lt;' characters are converted to "&amp;lt;".
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>printURLQuery</name>
+    <tagclass>org.apache.taglibs.foundation.print.PrintURLQueryTag</tagclass>
+    <bodycontent>Empty</bodycontent>              
+    <info>
+     Prints the value of an object as a text string with characters escaped
+     correctly for use as part of a URL HTTP GET query string.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>printValue</name>
+    <tagclass>org.apache.taglibs.foundation.print.PrintValueTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+     Prints the value of an object or object property for use as an
+     HTML forum input value with any '&amp;' characters converted to
+     "&amp;amp;" and any '"' characters converted to "&amp;quot;".
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>remove</name>
+    <tagclass>org.apache.taglibs.foundation.object.RemoveTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Removes an object from the page, request, session,
+      or application scope.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>save</name>
+    <tagclass>org.apache.taglibs.foundation.object.SaveTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Saves an object to the page, request, session, or application scope.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+    <attribute>
+      <name>obj</name>
+      <required>true</required>     
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>  
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+  </tag>
+
+  <tag>
+    <name>set</name>
+    <tagclass>org.apache.taglibs.foundation.object.SetTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Set the value of an object property from an object or
+      object property, body of tag, or default value.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>default</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>setProperties</name>
+    <tagclass>org.apache.taglibs.foundation.object.SetPropertiesTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Set the value of an objects properties from a Map object.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>map</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- Object Logic Tags -->
+
+  <tag>  
+    <name>areEqual</name>
+    <tagclass>org.apache.taglibs.foundation.logic.AreEqualTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Include tag body if objects or object properties are equal.</info>
+    <attribute>
+      <name>obj</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>forEach</name>
+    <tagclass>org.apache.taglibs.foundation.logic.ForEachTag</tagclass>
+    <teiclass>org.apache.taglibs.foundation.logic.ForEachTEI</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Loop through an Array, Map, or Iterator including the tag body each time.</info>
+    <attribute>                                                             
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>begin</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>end</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>step</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>isArray</name>
+    <tagclass>org.apache.taglibs.foundation.logic.IsArrayTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Include tag body if object or object property is an array.</info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>  
+    <name>isFalse</name>
+    <tagclass>org.apache.taglibs.foundation.logic.IsFalseTag</tagclass>
+    <bodycontent>JSP</bodycontent>                       
+    <info>Include tag body if object or object property is false.</info>
+    <attribute>                                      
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                      
+  </tag>
+
+  <tag>
+    <name>isIterator</name>
+    <tagclass>org.apache.taglibs.foundation.logic.IsIteratorTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Include tag body if object or object property is an iterator.</info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>isMap</name>
+    <tagclass>org.apache.taglibs.foundation.logic.IsMapTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Include tag body if object or object property is a Map.</info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>isPresent</name>
+    <tagclass>org.apache.taglibs.foundation.logic.IsPresentTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Test to see if an object exists.</info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+  </tag>
+
+  <tag> 
+    <name>isTrue</name>
+    <tagclass>org.apache.taglibs.foundation.logic.IsTrueTag</tagclass>
+    <bodycontent>JSP</bodycontent>                            
+    <info>Include tag body if object or object property is true.</info>
+    <attribute>                                               
+      <name>obj</name>                              
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+  </tag>
+
+  <tag>
+    <name>greaterEqual</name>
+    <tagclass>org.apache.taglibs.foundation.logic.GreaterEqualTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if object or object property 1 is greater than
+      or equal to object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>greaterThan</name>
+    <tagclass>org.apache.taglibs.foundation.logic.GreaterThanTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if object or object property 1 is greater than
+      object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>        
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>lessEqual</name>
+    <tagclass>org.apache.taglibs.foundation.logic.LessEqualTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if object or object property 1 is less than
+      or equal to object or object property 2.
+    </info> 
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>lessThan</name>
+    <tagclass>org.apache.taglibs.foundation.logic.LessThanTag</tagclass>
+    <bodycontent>JSP</bodycontent>            
+    <info>
+      Include tag body if object or object property 1 is less than
+      object or object property 2.
+    </info>
+    <attribute>                               
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>notArray</name>
+    <tagclass>org.apache.taglibs.foundation.logic.NotArrayTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if object or object property is not an array.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>notEqual</name>
+    <tagclass>org.apache.taglibs.foundation.logic.NotEqualTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if objects or object properties are not equal.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>notIterator</name>
+    <tagclass>org.apache.taglibs.foundation.logic.NotIteratorTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if object or object property is not an iterator.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>notMap</name>
+    <tagclass>org.apache.taglibs.foundation.logic.NotMapTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if object or object property is not a Map.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>notPresent</name>
+    <tagclass>org.apache.taglibs.foundation.logic.NotPresentTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Test to see if an object does not exist.</info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>userInRole</name>
+    <tagclass>org.apache.taglibs.foundation.logic.UserInRoleTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if current remote user is in a role by name.
+    </info>
+    <attribute>
+      <name>role</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>userNotInRole</name>
+    <tagclass>org.apache.taglibs.foundation.logic.UserNotInRoleTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if current remote user is not in a role by name.  
+    </info>
+    <attribute>
+      <name>role</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <!-- String Object Tags -->
+
+  <tag>
+    <name>endsWith</name>     
+    <tagclass>org.apache.taglibs.foundation.string.EndsWithTag</tagclass>
+    <bodycontent>JSP</bodycontent>            
+    <info>
+      Include tag body if String object or object property 1
+      ends with String object or object property 2.
+    </info>                                   
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>                      
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+  </tag>
+
+  <tag>
+    <name>endsWithout</name>
+    <tagclass>org.apache.taglibs.foundation.string.EndsWithoutTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if String object or object property 1
+      does not end with String object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>isMatch</name>
+    <tagclass>org.apache.taglibs.foundation.string.IsMatchTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if String object or object property 1
+      contains the String object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>noMatch</name>
+    <tagclass>org.apache.taglibs.foundation.string.NotMatchTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if String object or object property 1
+      contains the String object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    <attribute>     
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>startsWith</name>
+    <tagclass>org.apache.taglibs.foundation.string.StartsWithTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if String object or object property 1
+      starts with the String object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name> 
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>startsWithout</name>
+    <tagclass>org.apache.taglibs.foundation.string.StartsWithoutTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Include tag body if String object or object property 1
+      does not start with the String object or object property 2.
+    </info>
+    <attribute>
+      <name>obj</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+    <attribute>
+      <name>obj2</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ignorecase</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+  </tag>
+
+  <!-- Operation tags -->
+
+  <tag>
+    <name>addDateHeader</name>
+    <tagclass>org.apache.taglibs.foundation.header.AddDateHeaderTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Add a single HTTP date header.</info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>addHeader</name>
+    <tagclass>org.apache.taglibs.foundation.header.AddHeaderTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Add a single HTTP string header.</info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <tag>
+    <name>addIntegerHeader</name>
+    <tagclass>org.apache.taglibs.foundation.header.AddIntegerHeaderTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Add a single HTTP integer header.</info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <tag>
+    <name>encodeURL</name>
+    <tagclass>org.apache.taglibs.foundation.response.EncodeURLTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Encode a URL with the JSESSIONID if necessary.</info>
+  </tag>
+
+  <tag> 
+    <name>encodeRedirectURL</name>
+    <tagclass>org.apache.taglibs.foundation.response.EncodeRedirectURLTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Encode a URL with the JSESSIONID for use with sendRedirect.</info>
+  </tag>
+
+  <tag>
+    <name>flushBuffer</name>
+    <tagclass>org.apache.taglibs.foundation.response.FlushBufferTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>Forces any content in the buffer to be written to the client.</info>
+  </tag>
+
+  <tag>
+    <name>invalidate</name>
+    <tagclass>org.apache.taglibs.foundation.session.InvalidateTag</tagclass>
+    <bodycontent>Empty</bodycontent>
+    <info>
+      Invalidate a user session and remove it.
+    </info>
+  </tag>
+
+  <tag>
+    <name>log</name>
+    <tagclass>org.apache.taglibs.foundation.misc.LogTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Logs the content of the tag body to the web application context log.
+    </info>
+  </tag>
+
+  <tag> 
+    <name>sendError</name>
+    <tagclass>org.apache.taglibs.foundation.response.SendErrorTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Return an HTTP error as the HTTP Response.</info>
+    <attribute>
+      <name>error</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute> 
+    <attribute>
+      <name>reset</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                     
+  </tag>
+
+  <tag>
+    <name>sendRedirect</name>
+    <tagclass>org.apache.taglibs.foundation.response.SendRedirectTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Send a redirect to a URL as the HTTP Response.</info>
+  </tag>
+
+  <tag>
+    <name>setDateHeader</name>
+    <tagclass>org.apache.taglibs.foundation.header.SetDateHeaderTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Set a single HTTP date header.</info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <tag>
+    <name>setHeader</name>
+    <tagclass>org.apache.taglibs.foundation.header.SetHeaderTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Set a single HTTP string header.</info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                      
+    <attribute> 
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                      
+  </tag>
+
+  <tag>
+    <name>setIntegerHeader</name>
+    <tagclass>org.apache.taglibs.foundation.header.SetIntegerHeaderTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Set a single HTTP integer header.</info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                      
+    <attribute> 
+      <name>obj</name> 
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>                      
+  </tag>
+
+  <tag>
+    <name>skipPage</name>
+    <tagclass>org.apache.taglibs.foundation.logic.SkipPageTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>Skips the remainder of the JSP page.</info>
+  </tag>
+
+</taglib>

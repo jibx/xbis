@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+  <description>
+  Example web application illustrating the use of tags in the
+  "utility" custom tag library, from the JAKARTA-TAGLIBS project.
+  </description>
+
+    <taglib>
+        <taglib-uri>
+	   http://jakarta.apache.org/taglibs/utility
+        </taglib-uri>
+        <taglib-location>
+           /WEB-INF/utility.tld
+        </taglib-location>
+    </taglib>
+</web-app>

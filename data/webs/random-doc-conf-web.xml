@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+    <display-name>Random Tag Library Documentation</display-name>
+    <description>
+    Documentation for the "random" custom tag library for creating a random string
+    or number, from the JAKARAT-TAGLIBS project.
+    </description>
+
+</web-app>

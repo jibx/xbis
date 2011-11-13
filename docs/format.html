@@ -1,0 +1,475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>XBIS Encoding Format</title>
+      <style type="text/css">
+        @import url("./style/tigris.css");
+        @import url("./style/maven.css");
+    .dtd-comment {
+      color: #993399;
+      font-weight: bold;
+      </style>
+      <script type="text/javascript">
+        if (document.layers) {
+          document.writeln('<link rel="stylesheet" type="text/css" href="./style/ns4_only.css" media="screen" /><link rel="stylesheet" type="text/css" href="./style/maven_ns4_only.css" media="screen" />')
+        }
+      </script>
+      <link rel="stylesheet" type="text/css" href="./style/print.css" media="print" />
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body class="composite">
+<div id="banner">
+<table border="0" cellspacing="0" cellpadding="8" width="100%">
+  <tbody>
+    <tr>
+      <td><h1>XBIS Encoding Format</h1>
+      </td>
+      <td>
+      <div align="right" id="login"><a href="http://sourceforge.net">
+      <img src="http://sourceforge.net/sflogo.php?group_id=69358&amp;type=5"
+        width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div id="breadcrumbs">
+<table border="0" cellspacing="0" cellpadding="4" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <div align="right"><a href="http://www.xbis.org">Home Page</a> | <a href="http://www.sourceforge.net/projects/xbis/">SourceForge
+Project Page</a> | <a href="http://sourceforge.net/mail/?group_id=77740">Mailing Lists</a> | <a
+ href="http://sourceforge.net/project/showfiles.php?group_id=77740">Downloads</a> </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table border="0" cellspacing="0" cellpadding="8" width="100%" id="main">
+  <tbody>
+	<tr valign="top">
+	  <td id="leftcol" width="20%">
+		<div id="navcolumn">
+
+
+                <div>
+            <strong>XBIS Home</strong>
+                              <div>
+            <small>
+                    <a href="index.html">Introduction</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <span class="menu-selection">Format</span>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="performance.html">Performance</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="status.html">Status</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="./api/index.html">JavaDocs</a>
+                  </small>
+                </div>
+                      </div>
+      
+        </div>
+      </td>
+      <td>
+
+
+
+<p>The XBIS encoding format mirrors the standard text form of an XML
+document in that all components of the document are present in the
+same order they'd appear in text. What differs is that XBIS uses a
+more compact representation of the components, and presents them in a
+more easily processed form.</p>
+<p>The compactness comes mainly from taking advantage of the highly
+repetitive structure of a normal XML document, where the same element
+and attribute names are typically used many times over. XBIS defines
+each name as text only once, then uses a <b>handle</b> value to refer
+back to the name when it is repeated. This same approach is used with
+namespaces, so that even namespace prefixes are not repeated as
+text.</p>
+<p>XBIS can also apply this approach to attribute values and
+character data, which often use the same text repeatedly. The extent
+to which this is done is an encoding option, but does not actually
+effect the format itself; a reader does not need to know what options
+were used to generate the encoding in order to build a document
+representation from the encoded form. This is an important concern for
+general usage, since it allows documents to be exchanged between XBIS
+users without the need for any external information (such as a schema,
+or parameter settings).</p>
+<p>Besides the more compact representation, XBIS gains speed on the
+input side by presenting the document data in predigested form. This
+eliminates the need for any complex parsing of the input and allows
+the document to be reconstructed with minimal overhead.</p>
+
+<h3>Building Blocks</h3>
+<p>The XBIS encoding builds up from several simple types. These
+simple types are described in this section.</p>
+
+<table align=left cellpadding=5>
+<caption><b>Figure 1. Integer value representations</b></caption>
+<tr><td><img src="images/int-value-reps.gif" alt="Integer value representations" align=left width=315 height=445/></td></tr>
+</table>
+
+<h4>Integer Values</h4>
+<p>Positive integer values are used extensively in the encoding. The
+standard format of representing these values uses the low-order 7
+bits of a byte for the actual value representation, with the
+high-order 8th bit used as a continuation flag - when the 8th bit is
+set, the next byte in the encoded stream contains another 7 bits of
+the value.</p>
+<p>Figure 1 shows how this looks when applied to values of various
+sizes. Values in the range of 0-127 can be represented in a single
+byte, as shown in the top image. Values of 128-16383 require two
+bytes, as shown in the second image (where the upper byte comes first
+in the encoded form). Larger values require more bytes, all the way
+to a maximum of five bytes to represent the maximum possible integer
+value. In actual use, the values being encoded can generally be
+represented in one or two bytes.</p>
+<h4>Quick Values</h4>
+<p>Quick values are a way of representing a limited range of positive
+integer values within a portion of a byte. This format is often used
+in combination with flags in a byte. When a value is to be encoded in
+this manner it is first incremented. If the incremented value fits
+within the portion of the byte allowed for the quick value, the value
+is stored directly within the byte. Otherwise, a <code>0</code> is
+stored within the byte and the incremented value is encoded in the
+following byte(s) using the normal integer value encoding defined
+above.</p>
+<h4>Strings</h4>
+<p>Strings are the basic building blocks of the serial form. The
+general string format uses a leading length value which gives the
+number of characters (<b>not</b> bytes) in the string, plus one. The
+value <code>0</code> is used for a <code>null</code> string, as
+opposed to the value <code>1</code> which represents a string of zero
+characters.</p>
+<p>This length value is encoded as a normal integer value, as
+described above. It is followed immediately by the actual characters
+of the string. Each 16-bit Java character is also encoded as an
+integer value, so the length of the string data in bytes can
+potentially be up to three times the number of characters in the
+string (but for characters in the standard ASCII range the length in
+bytes will be the same as the number of characters).</p>
+<p>String lengths can also be encoded as quick values in some cases.
+These work slightly differently in that the actual character length
+of the string is encoded as a quick value, rather than the
+length-plus-one value used in the general format. Since there is no
+way of representing a <code>null</code> string with this encoding,
+quick values are used for string lengths only when the string is
+required to be non-<code>null</code>.</p>
+<h4>Handles</h4>
+<p>Handle values are used to refer to previously defined items, which
+include element and attribute names, namespaces (both active and
+defined), namespace URIs, and
+optionally attribute value and character data strings. Each type of
+item listed uses a separate set of handles in order to keep the
+handle values as small as possible, giving the most efficient
+encoding. The context of a handle reference always determines which
+type of handle is being referenced.</p>
+<p>Actual values start at <code>1</code>. Except for namespaces
+(which use a pair of predefined handles), a handle value of <code>1</code>
+will always represent the first item defined of that type, a handle
+of <code>2</code> the second, and so on.</p>
+<p>A <code>0</code> in a handle value is used to indicate that a new
+item of the appropriate type is being defined. The new item is
+implicitly assigned the next handle value of that type and may then
+be referenced by that handle value later in the encoding.</p>
+<p>When handles are encoded in quick value fields the actual value
+stored is one greater than the handle value, since as described above
+the quick value format makes special use of the <code>0</code> value.
+In this case a <code>1</code> indicates that a new item is being
+defined.</p>
+
+<h4>Names and Namespaces</h4>
+<p>Element and attribute name definitions use a common format.
+The first byte of the definition, shown in Figure 2, contains a quick
+value field for an active namespace handle, along with a separate quick
+value field for the local name length.
+</p>
+
+<table align=left cellpadding=5>
+<caption><b>Figure 2. Name definition byte</b></caption>
+<tr><td><img src="images/names.gif" alt="Name definition byte" align=left width=315 height=43/></td></tr>
+</table>
+
+<p>If the active namespace handle value is larger than can be represented in the quick
+value field (indicated by a <code>0</code> value in the field), the actual handle
+value immediately follows this definition byte. Two active namespace handles are
+predefined. Handle <code>1</code> is always assigned to the <b>no namespace</b>
+namespace, and handle <code>2</code> is always assigned to the <b>xml</b>
+namespace. Other namespaces are assigned active handles as they're declared,
+which may be reused for other namespaces outside the range of the first
+declaration.</p>
+
+<p>If the namespace used for a name has not previously been defined it may be
+included in the name definition. This uses the handle value <code>0</code> to
+indicate a new definition (as discussed in the section on <b>Handles</b>,
+above). In this case the name definition byte is followed by the actual
+namespace definition, starting with a byte of the form shown in Figure 3. Here
+one quick value field gives the namespace URI handle, while the second quick
+value field gives the prefix length. This first byte of the namespace definition
+is optionally followed by the encoded characters of the namespace URI (if this
+is the first time that URI has been used, as indicated by a handle value
+of <code>0</code>), and then by the encoded characters of the prefix (if
+any).</p>
+
+<table align=left cellpadding=5>
+<caption><b>Figure 3. Namespace definition lead byte</b></caption>
+<tr><td><img src="images/namespace.gif" alt="Namespace definition lead byte" align=left width=315 height=43/></td></tr>
+</table>
+
+<p>Going back to the basic name definition, the additional information for
+the local name is encoded after any additional information for the namespace.
+If the name length quick value field in the name definition byte is too small
+to hold the length, the full length follows any namespace information. It is
+followed by the encoded characters of the local name.</p>
+
+<h3>Structure Encoding</h3>
+
+<p>XBIS is a stream encoding which is mainly intended for use with
+single documents. However, the format allows for encoding arbitrary
+combinations of elements and documents, and there are cases where
+this may be very useful to an application. Consider the case where
+multiple documents of the same type are being transferred from one
+program to another, for instance. The first document encoded would
+define most or all of the element and attribute names used in the
+entire series of documents, allowing the names to be referenced as
+simple handles in all the following encoded documents.</p>
+
+<p>Each XBIS stream starts with four bytes reserved for XBIS itself.
+The first byte is a format identifier, which is set by the encoder to
+specify the format version used to encode the document and checked by
+the decoder to ensure that it is able to process that format. The
+only value used at present is <code>1</code>, identifying the format
+defined by this document.</p>
+
+<p>The second byte is an identifier for the adapter used to drive the
+encoding. This value is set by the encoder for information purposes
+only; the decoder reads this value and makes it available to the
+application but may not otherwise use it. This requirement is
+intended to preserve compatibility between all XBIS adapters. There
+are currently three values defined for this byte, <code>1</code> for
+the SAX2 adapter, <code>2</code> for the DOM adapter, <code>3</code> for
+the dom4j adapter, and <code>4</code> for the JDOM adapter.</p>
+
+<p>The remaining two bytes of XBIS header are reserved for future
+use. They are currently written as <code>0</code> values and are
+ignored on input.</p>
+
+<p>After the header the stream consists of one or more <i>nodes</i>.
+These are the primary document structure components, representing
+everything from a complete document down to a comment or character
+data string. Attributes are <b>not</b> considered nodes in the XBIS
+encoding, though, and are handled separately.</p>
+
+<p>At the top level only two types of nodes are valid, element nodes
+and document nodes (when XBIS is used for complete documents, only
+the document nodes are valid at the top level). Each of these may in
+turn contain other nodes (including element nodes) as content. The
+content node definitions are nested within the definition of the
+containing node.</p>
+
+<p>Each node begins with a node definition byte, which may be
+followed by additional information for the node. This node definition
+byte uses different formats for different types of nodes, with the
+high-order bits used as flags to identify the format.</p>
+
+<h4>Element Nodes</h4>
+
+<p>Element nodes use the format shown in Figure 4. The high-order bit of the
+node definition byte is always a 1 for an element node, and the next two bits
+are used as flags for whether the element has, respectively, attributes
+(including namespace declarations) and content (0 if not, 1 if so). The
+remaining bits are a quick value for the element name handle, extended if
+necessary into the following byte(s). If the name has not previously been
+defined, the new name definition immediately follows the node definition
+byte.</p>
+
+<table align=right cellpadding=5>
+<caption><b>Figure 4. Node definition byte - Element</b></caption>
+<tr><td><img src="images/node-element.gif" alt="Node definition byte - Element" align=right width=315 height=115/></td></tr>
+</table>
+
+<p>If the element has attributes, these are next. Attributes begin
+with an attribute definition byte, taking one of the forms shown in
+Figure 5. The top format is used for attributes with ordinary
+(unshared) values. The bottom format is used for attributes with
+shared values, which use handles to avoid encoding the same text
+repeatedly. Both ordinary and shared attribute values may be used in
+any combination.</p>
+
+<table align=left cellpadding=5>
+<caption><b>Figure 5. Attribute definition byte formats</b></caption>
+<tr><td><img src="images/attribute-def.gif" alt="Attribute definition byte formats" align=left width=315 height=133/></td></tr>
+</table>
+
+<p>Both attribute definition byte formats use the low-order bits
+of the byte for a quick value of the attribute name handle (extended,
+if necessary, to the following byte(s)). If the name has not
+previously been defined the name definition immediately follows the
+attribute definition byte.</p>
+
+<p>The actual value of the attribute is next. For ordinary values,
+and for new shared values (as indicated by the flag in the attribute
+definition byte), these are strings in the general format. For
+previously-defined shared values the value is represented by a handle
+which identifies the value text.</p>
+
+<p>The list of attributes for an element is terminated by a <code>0</code>
+value in place of an attribute definition byte (which can never be
+<code>0</code>). If the node definition byte for the element does not
+indicate that attributes are present this <code>0</code> value is not
+included in the encoding.</p>
+
+<p>If the element has content, the content nodes are next. The
+content nodes can be of any type (subject to XML structure concerns -
+a document as content of an element is obviously invalid, for
+instance). Each begins with a node definition byte, and as with the
+attributes the list of content nodes is terminated by a <code>0</code>
+byte in place of a node definition byte.</p>
+
+<table align=right cellpadding=5>
+<caption><b>Figure 6. Node definition byte - Plain text</b></caption>
+<tr><td><img src="images/node-plain-text.gif" alt="Node definition byte - Plain text" align=right width=315 height=43/></td></tr>
+</table>
+
+<h4>Text Nodes</h4>
+
+<p>Plain text (ordinary character data) nodes use the format
+shown in Figure 6. This gives the text length as a quick value in the
+low-order bits of the node definition byte (extended, if necessary,
+to the following byte(s)). It is followed by the actual encoded
+characters of text.</p>
+
+<table align=left cellpadding=5>
+<caption><b>Figure 7. Node definition byte - Shared text</b></caption>
+<tr><td><img src="images/node-shared-text.gif" alt="Node definition byte - Shared text" align=left width=315 height=43/></td></tr>
+</table>
+
+<p>Shared text nodes use the format
+shown in Figure 7. This gives the handle for shared text in the
+low-order bits of the node definition byte (extended, if necessary,
+to the following byte(s)). If the text has not previously been
+defined (as indicated by a 0 value for the handle), the text
+definition immediately follows the node definition byte, as a string
+in the general format.</p>
+
+<p>Both types of text nodes can be used within a single document, in
+any combination.</p>
+
+<h4>Namespace Declaration Nodes</h4>
+<p>Namespace declaration nodes can be used both to define new namespaces and
+to reference previously-defined namespaces. The first byte uses the format
+show in Figure 8, with a quick value field for a namespace definition handle
+in the low-order bits. If the node is redeclaring a previously-defined
+namespace the handle value will reference that namespace definition. As usual,
+a handle value of <code>0</code> is used to indicate a new handle definition.
+In this case the actual namespace definition (in the format described above,
+under <b>Names and Namespaces</b>) follows the first byte.</p>
+
+<table align=right cellpadding=5>
+<caption><b>Figure 8. Node definition byte - Namespace</b></caption>
+<tr><td><img src="images/node-namespace.gif" alt="Node definition byte - Namespace" align=right width=315 height=43/></td></tr>
+</table>
+
+<p>Namespace declarations always apply in the scope of an element. When a
+namespace declaration node is used it must precede the element it applies
+to. Namespaces may also be declared as part of an element or attribute name
+definition, when the namespace applies to that name. When a namespace is
+first defined it's assigned a namespace definition handle, and each time it's
+declared it's assigned an active namespace handle. The active namespace handle
+is only valid within the scope of the element declaring the namespace, while
+the namespace definition handle is valid from the point of definition on.</p>
+
+<p>Each namespace definition associates a particular prefix (which may be the
+empty prefix) with a particular namespace URI. If multiple prefixes are
+defined for the same namespace URI a separate namespace definition is
+included in the serial form for each prefix. The actual URI will only be
+encoded with the first namespace definition, though, and will be referenced
+using a handle in any other </p>
+
+<table align=right cellpadding=5>
+<caption><b>Figure 9. Node definition byte - Other</b></caption>
+<tr><td><img src="images/node-other.gif" alt="Node definition byte - Other" align=right width=315 height=43/></td></tr>
+</table>
+
+<h4>Other Nodes</h4>
+<p>The other node types use a simple format in which the node
+definition byte just identifies the type of node, and any additional
+information for that node type is in the following bytes (with text
+items using the general text format, as described under <b>Strings</b>,
+above). These other node types are:
+</p>
+<ol>
+	<li><p style="margin-bottom: 0cm">Document node: followed by content
+	node list, as for element node</p>
+	<li><p style="margin-bottom: 0cm">Comment node: followed by actual
+  comment text</p>
+	<li><p style="margin-bottom: 0cm">CDATA node: followed by CDATA
+	text</p>
+	<li><p style="margin-bottom: 0cm">Processing Instruction node:
+	followed by target and value text items</p>
+	<li><p style="margin-bottom: 0cm">Document Type node: followed by name,
+  public id, and system id text items</p>
+	<li><p style="margin-bottom: 0cm">Notation node: followed by name,
+	public id, and system id text items</p>
+	<li><p style="margin-bottom: 0cm">Unparsed Entity declaration node:
+  followed by name, public id, system id, and notation name text items</p>
+	<li><p style="margin-bottom: 0cm">Skipped Entity node: followed by
+  the entity name text</p>
+  <li><p style="margin-bottom: 0cm">Element declaration node: followed by
+  element name and content model text items</li>
+  <li><p style="margin-bottom: 0cm">Attribute declaration node: followed by
+  owning element name, attribute name, attribute type, defaulting type, and
+  default value text items</li>
+	<li><p style="margin-bottom: 0cm">External Entity declaration node:
+  followed by name, public id, and system id text items</p>
+</ol>
+<p>The value <code>0</code> for a node definition byte is used to
+indicate the end of a list of node definitions. All other values not included
+in the above list are reserved and currently unused.</p>
+
+<p>Note that most of these node types are not required for preserving the
+canonical form of XML documents, since XML Canonicalization discards Document
+Type, Notation, Unparsed/Skipped/External Entity, and Element/Attribute
+declaration information. These types are supported by XBIS
+to allow its use as a serialization mechanism for XML document
+models, but they should be considered optional.</p>
+
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div id="footer">
+<table border="0" cellspacing="0" cellpadding="4">
+  <tbody>
+    <tr>
+      <td> &copy; 2003-2004, Dennis M. Sosnoski (<a href="http://www.sosnoski.com">Sosnoski Software Solutions, Inc.</a>).
+      Licensed to the XBIS Project for free distribution and use. </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+</body>
+</html>

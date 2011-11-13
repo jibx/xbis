@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- a tag library descriptor -->
+
+<taglib>
+  <!-- after this the default space is
+	"http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd"
+   -->
+
+  <!-- The version number of this tag library -->
+  <tlibversion>1.0</tlibversion>
+
+  <!-- The JSP specification version required to function -->
+  <jspversion>1.1</jspversion>
+
+  <!-- The short name of this tag library -->
+  <shortname>utility</shortname>
+
+  <!-- Public URI that uniquely identifies this version of the tag library -->
+  <uri>http://jakarta.apache.org/taglibs/utility</uri>
+
+  <!-- General information about this tag library -->
+  <info>
+        A simple tag library for examples
+  </info>
+
+  <!-- ******************** Defined Custom Tags *************************** -->
+
+  <!-- A simple Tag -->
+  <!-- Hello tag -->
+  <tag>
+    <name>Hello</name>
+    <tagclass>org.apache.taglibs.utility.basic.Hello</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>
+	Print Hello World 
+    </info>
+  </tag>
+
+  <!-- A simple Tag -->
+  <!-- Date tag -->
+  <tag>
+    <name>Date</name>
+    <tagclass>org.apache.taglibs.utility.basic.DateDisplay</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>
+	Display current date
+    </info>
+  </tag>
+
+  <!-- A simple Tag -->
+  <!-- MacroCopy tag -->
+  <tag>
+    <name>MacroCopy</name>
+    <tagclass>org.apache.taglibs.utility.basic.MacroCopy</tagclass>
+    <info>
+	Copy the text specified within tag to a Writer. 
+    </info>
+    <attribute>
+	<name>name</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- A simple Tag -->
+  <!-- MacroPaste tag -->
+  <tag>
+    <name>MacroPaste</name>
+    <tagclass>org.apache.taglibs.utility.basic.MacroPaste</tagclass>
+    <info>
+	Paste the text specified by a Writer to the page. 
+    </info>
+    <attribute>
+	<name>name</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- ShowSource tag -->
+  <tag>
+    <name>ShowSource</name>
+    <tagclass>org.apache.taglibs.utility.basic.ShowSource</tagclass>
+    <info>
+	Copy the text specified within tag to a Writer. 
+    </info>
+    <attribute>
+	<name>jspFile</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- Include tag -->
+  <tag>
+    <name>include</name>
+    <tagclass>org.apache.taglibs.utility.basic.IncludeTag</tagclass>
+    <info>
+	Include output of the URL specified. 
+    </info>
+    <attribute>
+	<name>url</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- IF tag -->
+  <tag>
+    <name>If</name>
+    <tagclass>org.apache.taglibs.utility.lang.IfTag</tagclass>
+    <info>
+	Conditional Tag.
+    </info>
+    <attribute>
+	<name>predicate</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- For tag -->
+  <tag>
+    <name>for</name>
+    <tagclass>org.apache.taglibs.utility.lang.ForTag</tagclass>
+    <teiclass>org.apache.taglibs.utility.lang.ForTagExtraInfo</teiclass>
+    <info>
+	Paste the text specified by a Writer to the page. 
+    </info>
+    <attribute>
+	<name>iterations</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>varName</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>begin</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <!-- useBean tag -->
+  <tag>
+    <name>useBean</name>
+    <tagclass>org.apache.taglibs.utility.lang.UseBeanTag</tagclass>
+    <teiclass>org.apache.taglibs.utility.lang.UseBeanTEI</teiclass>
+    <info>
+	Paste the text specified by a Writer to the page. 
+    </info>
+    <attribute>
+	<name>id</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>scope</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>classname</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>type</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>beanName</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>processRequest</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+ <!-- Validate tag -->
+  <tag>
+    <name>Validate</name>
+    <tagclass>org.apache.taglibs.utility.basic.ValidateTag</tagclass>
+    <info>
+	Generate Javascript to validate the HTML form. 
+    </info>
+    <attribute>
+	<name>name</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>method</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+	<name>reqdFields</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+</taglib>

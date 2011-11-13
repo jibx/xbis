@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+	<description>
+  Example web application illustrating the use of tags in the
+  "request" custom tag library, from the JAKARTA-TAGLIBS project.
+  </description>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>htm</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+	</welcome-file-list>
+	<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/request-1.0</taglib-uri>
+		<taglib-location>/WEB-INF/request.tld</taglib-location>
+	</taglib>
+	<security-role>
+		<role-name>admin</role-name>
+	</security-role>
+</web-app>

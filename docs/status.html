@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>XBIS Status</title>
+      <style type="text/css">
+        @import url("./style/tigris.css");
+        @import url("./style/maven.css");
+    .dtd-comment {
+      color: #993399;
+      font-weight: bold;
+      </style>
+      <script type="text/javascript">
+        if (document.layers) {
+          document.writeln('<link rel="stylesheet" type="text/css" href="./style/ns4_only.css" media="screen" /><link rel="stylesheet" type="text/css" href="./style/maven_ns4_only.css" media="screen" />')
+        }
+      </script>
+      <link rel="stylesheet" type="text/css" href="./style/print.css" media="print" />
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body class="composite">
+<div id="banner">
+<table border="0" cellspacing="0" cellpadding="8" width="100%">
+  <tbody>
+    <tr>
+      <td><h1>XBIS Status</h1>
+      </td>
+      <td>
+      <div align="right" id="login"><a href="http://sourceforge.net">
+      <img src="http://sourceforge.net/sflogo.php?group_id=69358&amp;type=5"
+        width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div id="breadcrumbs">
+<table border="0" cellspacing="0" cellpadding="4" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <div align="right"><a href="http://www.xbis.org">Home Page</a> | <a href="http://www.sourceforge.net/projects/xbis/">SourceForge
+Project Page</a> | <a href="http://sourceforge.net/mail/?group_id=77740">Mailing Lists</a> | <a
+ href="http://sourceforge.net/project/showfiles.php?group_id=77740">Downloads</a> </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table border="0" cellspacing="0" cellpadding="8" width="100%" id="main">
+  <tbody>
+	<tr valign="top">
+	  <td id="leftcol" width="20%">
+		<div id="navcolumn">
+
+
+                <div>
+            <strong>XBIS Home</strong>
+                              <div>
+            <small>
+                    <a href="index.html">Introduction</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="format.html">Format</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="performance.html">Performance</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <span class="menu-selection">Status</span>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="./api/index.html">JavaDocs</a>
+                  </small>
+                </div>
+                      </div>
+      
+        </div>
+      </td>
+      <td>
+
+
+
+
+<P STYLE="margin-bottom: 0cm">The 0.9.5 release is a full Java implementation
+of the XBIS encoding format with adapters for SAX2 input and output. For a
+production release I'd like to include adapters for XMLPull and StAX parser
+APIs, as well as DOM, dom4j, and possibly XOM and JDOM document models. Most
+of the work for these adapters has already been done for the earlier XMLS
+project, but needs to be updated to work with the underlying XBIS code.</P>
+
+<P STYLE="margin-bottom: 0cm">I believe XBIS currently supports roundtripping
+documents (text to XBIS, followed by XBIS to text) with all necessary
+information preserved so that the canonical form of the roundtripped document
+is identical to that of the original document. Testing this in depth is a
+time consuming process, especially since the testing can be effected by parser
+limitations. As a preliminary step, the code includes a test program for
+roundtripping documents and comparing the roundtripped document text to the
+text generated directly from a parse of the original document. This is the
+<code>test.RoundTrip</code> program (included in the
+<i>/tests</i> directory of the distribution, with source code under the
+<i>/build/src</i> directory). This program takes three command line arguments:
+The input file; the output file for the text generated directly from a parse;
+and the output file for the text generated after conversion to and from XBIS.
+When run, it writes the two versions of the output to the specified files (to
+allow direct inspection of the results) and also does a direct byte-by-byte
+comparison of the two versions. As with the performance test program, this
+program requires the SAX2 parser to be specified with a property definition on
+the Java command line of the form <code>-Dorg.xml.sax.driver=com.bluecast.xml.Piccolo</code>
+(for Piccolo), <code>-Dorg.xml.sax.driver=org.apache.xerces.parsers.SAXParser</code>
+(for Xerces), or the equivalent for other parsers.</P>
+
+<P STYLE="margin-bottom: 0cm">For documents that don't use namespaces this program should generally give an
+exact match between the two output documents. This doesn't hold for documents
+with namespaces, because the namespaces are output as attributes in a different
+order from how they're reported by the parser. Note that this difference does
+not effect the canonical form of the documents, since XML treats
+attribute order as irrelevant. Documents with DTDs will also generally not be
+roundtripped with exact matches (because XBIS does not preserve internal entity
+definitions), but this is again an issue that is irrelevant
+to the canonical form of documents.</P>
+
+<P STYLE="margin-bottom: 0cm">I (Dennis Sosnoski, XBIS designer and developer)
+provide <a href="http://www.sosnoski.com">Java XML and Web services
+consulting, training, and support</a> through my company, Sosnoski Software
+Solutions, Inc. At present I don't have any commercial projects
+using XBIS, so work on it tends to take a low priority. If you're interested
+in using XBIS for a commercial project and would like to find out about support
+options, contact me directly via <a href="mailto:dms@sosnoski.com">email</a> or
+telephone (425.885.7197). You're also welcome to use it directly, of course,
+since it's open source with minimal restrictions.</P>
+
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div id="footer">
+<table border="0" cellspacing="0" cellpadding="4">
+  <tbody>
+    <tr>
+      <td> &copy; 2003-2004, Dennis M. Sosnoski (<a href="http://www.sosnoski.com">Sosnoski Software Solutions, Inc.</a>).
+      Licensed to the XBIS Project for free distribution and use. </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+</body>
+</html>

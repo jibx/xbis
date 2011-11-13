@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+    <description>
+        Examples for the JavaServer Pages Standard Tag Library (jsptl).
+    </description>
+
+    <!-- Modify this context parameter to set a new class to be the default
+         expression language for the application. -->
+    <context-param>
+        <param-name>javax.servlet.jsptl.ExpressionEvaluatorClass</param-name>
+        <param-value>org.apache.taglibs.jsptl.lang.spel.Evaluator</param-value>
+    </context-param>
+
+    <listener>
+      <listener-class>org.apache.taglibs.jsptl.examples.startup.Init</listener-class>
+    </listener>
+
+    <taglib>
+        <taglib-uri>http://java.sun.com/jsptl/ea/jx</taglib-uri>
+        <taglib-location>/WEB-INF/jx.tld</taglib-location>
+    </taglib>
+
+    <taglib>
+        <taglib-uri>http://java.sun.com/jsptl/ea/jr</taglib-uri>
+        <taglib-location>/WEB-INF/jr.tld</taglib-location>
+    </taglib>
+
+    <taglib>
+        <taglib-uri>/jsptl-examples-taglib</taglib-uri>
+        <taglib-location>/WEB-INF/jsptl-examples.tld</taglib-location>
+    </taglib>
+</web-app>

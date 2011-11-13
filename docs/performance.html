@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>XBIS Performance</title>
+      <style type="text/css">
+        @import url("./style/tigris.css");
+        @import url("./style/maven.css");
+    .dtd-comment {
+      color: #993399;
+      font-weight: bold;
+      </style>
+      <script type="text/javascript">
+        if (document.layers) {
+          document.writeln('<link rel="stylesheet" type="text/css" href="./style/ns4_only.css" media="screen" /><link rel="stylesheet" type="text/css" href="./style/maven_ns4_only.css" media="screen" />')
+        }
+      </script>
+      <link rel="stylesheet" type="text/css" href="./style/print.css" media="print" />
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body class="composite">
+<div id="banner">
+<table border="0" cellspacing="0" cellpadding="8" width="100%">
+  <tbody>
+    <tr>
+      <td><h1>XBIS Performance</h1>
+      </td>
+      <td>
+      <div align="right" id="login"><a href="http://sourceforge.net">
+      <img src="http://sourceforge.net/sflogo.php?group_id=69358&amp;type=5"
+        width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div id="breadcrumbs">
+<table border="0" cellspacing="0" cellpadding="4" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <div align="right"><a href="http://www.xbis.org">Home Page</a> | <a href="http://www.sourceforge.net/projects/xbis/">SourceForge
+Project Page</a> | <a href="http://sourceforge.net/mail/?group_id=77740">Mailing Lists</a> | <a
+ href="http://sourceforge.net/project/showfiles.php?group_id=77740">Downloads</a> </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<table border="0" cellspacing="0" cellpadding="8" width="100%" id="main">
+  <tbody>
+	<tr valign="top">
+	  <td id="leftcol" width="20%">
+		<div id="navcolumn">
+
+
+                <div>
+            <strong>XBIS Home</strong>
+                              <div>
+            <small>
+                    <a href="index.html">Introduction</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="format.html">Format</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <span class="menu-selection">Performance</span>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="status.html">Status</a>
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    
+                  </small>
+                </div>
+                                    <div>
+            <small>
+                    <a href="./api/index.html">JavaDocs</a>
+                  </small>
+                </div>
+                      </div>
+      
+        </div>
+      </td>
+      <td>
+
+
+
+
+<P STYLE="margin-bottom: 0cm">The current XBIS code includes a test
+program for comparing XBIS performance with both text XML and zip/gzip
+compression of text, <code>test.RunTest</code> (included in the
+<i>/tests</i> directory of the distribution, with source code under the
+<i>/build/src</i> directory). This program uses one or more sets of test
+data, each consisting of either a single document or a collection of
+documents. The test program first reads the current test data set into
+memory as an array of bytes, then calls one of four test implementation
+classes (test.TextTEXT, TextXBIS, TextZIP, or TestGZIP, as selected by the
+first command line argument, which must be "TEXT", "XBIS", "ZIP", or "GZIP").
+It requires the SAX2 parser to be specified with a property definition on
+the Java command line of the form <code>-Dorg.xml.sax.driver=com.bluecast.xml.Piccolo</code>
+(for Piccolo), <code>-Dorg.xml.sax.driver=org.apache.xerces.parsers.SAXParser</code>
+(for Xerces), or the equivalent for other parsers. When the test implementation
+class is called by the test program it performs the actual tests
+and fills measured time values into an array of results, which are
+accumulated by the test program across all test data sets and printed at
+the end.</P>
+<H3 CLASS="western">Timing Methodology</H3>
+<P STYLE="margin-bottom: 0cm">The actual timing measurements are done
+using several passes over the test data set. Each pass may involve
+several repetitions of an operation with the test data set. The
+elapsed time for each pass is measured, and only the best time is
+saved and returned. This technique was adopted in order to obtain
+consistent timing results, since average times across even a larger
+number of passes showed much more variation than the best pass times,
+apparently due to JVM whims.</P>
+
+<P STYLE="margin-bottom: 0cm">The general sequence of operations is as
+follows for each test implementation:</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0cm">Parse document from the in-memory
+	text (as a <code>ByteArrayInputStream</code>), with
+	processing of SAX2 events by a simple handler that counts different
+	types of items. This is measured as the basic text parse time, and
+  also as the input time for the TEXT version of the test.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Parse document a second time, saving
+  the parse event information to an in-memory store. This allows the
+  events to be replayed at a fraction of the overhead of a full text
+  parse, providing more accurate timing results for the following step.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Replay the parse events from the
+  in-memory store, generating output to memory in the appropriate form for the
+  particular test. In the case of TEXT this uses JAXP with a null
+  transformation to generate plain document text output; for GZIP this
+  uses JAXP with a null transformation streamed to a
+  <code>java.util.zip.GZIPOutputStream</code>; for XBIS this uses a
+  <code>org.xbis.SAXToXBISAdapter</code>.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Process the output generated in the
+  last step to regenerate the SAX2 parser output. In the case of TEXT
+  this uses a SAX2 parser; for GZIP this uses a <code>java.util.zip.GZIPInputStream</code>
+  streamed to a SAX2 parser; for XBIS this uses a
+  <code>org.xbis.XBISToSAXAdapter</code>.</P>
+</OL>
+
+<H3 CLASS="western">Test Data</H3>
+<P STYLE="margin-bottom: 0cm">The supplied test data sets are broken up into medium and large individual
+documents, along with several collections of smaller documents. The
+medium documents are:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><i>periodic.xml</i>,
+	periodic table of the elements in XML. Some attributes, fairly flat
+	tree (114K bytes). 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><i>soap2.xml</i>, generated
+	array of values in SOAP document form. Heavy on namespaces and
+	attributes (131K bytes). 
+	</P>
+</UL>
+<P STYLE="margin-bottom: 0cm">Published test results use a third medium
+sized file, <i>xml.xml</i>. This is the actual text of the XML
+specification, with the external DTD reference removed and all entities defined
+in the internal DTD subset. It consists of presentation-style markup with heavy mixed content
+and some attributes. This file is not included in the distribution due to
+copyright restrictions that prohibit distributing any modified version of the
+document.</P>
+
+<P STYLE="margin-bottom: 0cm">The large documents are:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><i>weblog.xml</i>,
+	a log of web page accesses reformatted as XML. Flat structure with
+	no attributes and generally short character data sequences as
+	content (2.9M bytes).</P>
+	<LI><P STYLE="margin-bottom: 0cm"><i>factbook.xml</i>,
+	CIA World Factbook data reformatted as XML. Variable structure with
+	no attributes and heavy character data content (4.0M bytes).</P>
+</UL>
+
+<P STYLE="margin-bottom: 0cm">The collections of small documents are:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><i>ants</i>,
+	XML configuration files for the Ant build utility from a number of
+	open source projects (18 documents, 100K bytes total).</P>
+	<LI><P STYLE="margin-bottom: 0cm"><i>fms</i>,
+	RDF documents from Freshmeat.net (37 documents, 136K bytes total).</P>
+	<LI><P STYLE="margin-bottom: 0cm"><i>soaps</i>,
+	SOAP request and response documents from an early version of the
+	SOAP 1.2 specification and from an interoperability test set (42
+	documents, 30K bytes total).</P>
+	<LI><P STYLE="margin-bottom: 0cm"><i>webs</i>,
+	web application configuration files from a number of open source
+	projects (70 documents, 132K bytes total).</P>
+</UL>
+
+<H3 CLASS="western">Test Results</H3>
+<P STYLE="margin-bottom: 0cm">Current timing results are published on
+the IBM developerWorks XML zone, in the article <a
+href="http://www-106.ibm.com/developerworks/xml/library/x-trans2/">Improve
+XML transport performance, Part 2</a>.</P>
+
+<P STYLE="margin-bottom: 0cm">As a supplement to the charts supplied in that
+article, the three figures below give the results for a test run with the Sun
+1.4.1 JVM for Linux (using the Piccolo parser, which tends to deliver the best
+performance of the ones I've tested with the Sun JVM). Note that the zip and
+gzip performance shown in these test
+results is far worse than those from the IBM 1.4.1 JVM. I haven't identified
+the cause of the problem, but it appears to be present for both the 1.4.1 and
+1.4.2 JVMs from Sun (those are the only ones I've tried).</P>
+
+<table align=center cellpadding=5>
+<caption><b>Figure 1. Medium document performance, Sun 1.4.1 JVM</b></caption>
+<tr><td><img src="images/resultssun-medium.gif" alt="Medium document performance, Sun 1.4.1 JVM" align=right width=576 height=837/></td></tr>
+</table>
+
+<table align=center cellpadding=5>
+<caption><b>Figure 2. Large document performance, Sun 1.4.1 JVM</b></caption>
+<tr><td><img src="images/resultssun-large.gif" alt="Large document performance, Sun 1.4.1 JVM" align=right width=576 height=839/></td></tr>
+</table>
+
+<table align=center cellpadding=5>
+<caption><b>Figure 3. Small document performance, Sun 1.4.1 JVM</b></caption>
+<tr><td><img src="images/resultssun-small.gif" alt="Small document performance, Sun 1.4.1 JVM" align=right width=573 height=836/></td></tr>
+</table>
+
+<P STYLE="margin-bottom: 0cm">The total times are 9.55 seconds for text, 3.44
+seconds for XBIS, 247.65 seconds for zip, and 251.20 seconds for gzip. The next
+three figures give the results for the same tests, run on the IBM 1.4.1 JVM (also
+using the Piccolo parser). These are essentially the same results as shown in
+the developerWorks article referenced above, though these include the zip test
+results and were run on the final version of the code included in the 0.9.5
+release (a slightly later version than was used for the test results published
+in the article). The total times in this case are 4.53 seconds for
+text, 2.21 seconds for XBIS, 12.18 seconds for zip, and 12.72 seconds for
+gzip.</P>
+
+<table align=center cellpadding=5>
+<caption><b>Figure 4. Medium document performance, IBM 1.4.1 JVM</b></caption>
+<tr><td><img src="images/resultssun-medium.gif" alt="Medium document performance, IBM 1.4.1 JVM" align=right width=572 height=837/></td></tr>
+</table>
+
+<table align=center cellpadding=5>
+<caption><b>Figure 5. Large document performance, IBM 1.4.1 JVM</b></caption>
+<tr><td><img src="images/resultssun-large.gif" alt="Large document performance, IBM 1.4.1 JVM" align=right width=576 height=839/></td></tr>
+</table>
+
+<table align=center cellpadding=5>
+<caption><b>Figure 6. Small document performance, IBM 1.4.1 JVM</b></caption>
+<tr><td><img src="images/resultssun-small.gif" alt="Small document performance, IBM 1.4.1 JVM" align=right width=573 height=836/></td></tr>
+</table>
+
+<P STYLE="margin-bottom: 0cm">Earlier timing results (included in the
+<b>0.9</b> distribution) compared XBIS with different XML parsers running
+on different JVMs. These tests used a text output approach that was
+considerably slower than the JAXP null transformation in the current
+test code. The newer approach has reduced the relative advantage of XBIS
+over text for output, more accurately reflecting the benefits of the
+different techniques.</P>
+
+
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div id="footer">
+<table border="0" cellspacing="0" cellpadding="4">
+  <tbody>
+    <tr>
+      <td> &copy; 2003-2004, Dennis M. Sosnoski (<a href="http://www.sosnoski.com">Sosnoski Software Solutions, Inc.</a>).
+      Licensed to the XBIS Project for free distribution and use. </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+</body>
+</html>

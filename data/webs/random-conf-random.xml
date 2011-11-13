@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib> 
+	<tlibversion>1.0</tlibversion> <jspversion>1.1</jspversion>
+        <shortname>rand</shortname>
+        <uri>http://jakarta.apache.org/taglibs/random</uri>
+        <info>
+	     This tag set creates a generator for a variable length random string,
+	     or a random number within a given range.  A hashmap can be named from
+	     which comparisons will be made to the keys to insure uniqueness of the
+	     randomly created string or number.
+	</info>
+
+	<tag>
+		<name>number</name>
+		<tagclass>org.apache.taglibs.random.RandomNumTag</tagclass>
+		<teiclass>org.apache.taglibs.random.RandomNumTei</teiclass>
+		<bodycontent>empty</bodycontent>
+		<info>Creates a random number within a specified range</info>
+
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+ 		<attribute>
+ 			<name>range</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 		</attribute>
+ 		<attribute>
+ 			<name>map</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 		</attribute>
+	</tag>
+	<tag>
+		<name>string</name>
+		<tagclass>org.apache.taglibs.random.RandomStrgTag</tagclass>
+		<teiclass>org.apache.taglibs.random.RandomStrgTei</teiclass>
+		<bodycontent>empty</bodycontent>
+		<info>Creates a variable length random string</info>
+
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+ 		<attribute>
+ 			<name>length</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 		</attribute>
+ 		<attribute>
+ 			<name>map</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 		</attribute>
+ 		<attribute>
+ 			<name>charset</name>
+ 			<required>false</required>
+ 			<rtexprvalue>false</rtexprvalue>
+ 		</attribute>
+	</tag>
+</taglib>

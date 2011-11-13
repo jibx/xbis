@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+    <display-name>Mailer Tag Library Documentation</display-name>
+    <description>
+	Documentation for the "mailer" custom tag library for sending mail,
+	from the JAKARTA-TAGLIBS project.
+    </description>
+
+</web-app>

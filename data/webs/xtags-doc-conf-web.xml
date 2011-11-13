@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<web-app>
+    <display-name>xtags documentation</display-name>
+    <description>HTML and Javadocs for the xtags JSP tag library.</description>
+    <welcome-file-list>
+        <welcome-file>xtags.html</welcome-file>
+    </welcome-file-list>
+</web-app>

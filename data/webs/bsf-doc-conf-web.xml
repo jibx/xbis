@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+    <taglib>
+        <taglib-uri>
+	   BSFTAGS
+        </taglib-uri>
+        <taglib-location>
+           /WEB-INF/tld/xmltags.tld
+        </taglib-location>
+    </taglib>
+</web-app>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- The tag library descriptor -->
+
+<taglib>
+
+  <!-- Basic library information -->
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>Simple XSL Tags Library</shortname>
+  <uri>http://jakarta.apache.org/taglibs/xsl-1.0</uri>
+  
+  <info>
+	A simple tag library for processing XML input sources
+	with XML stylesheet transformations.
+  </info>
+
+
+  <!-- Apply XSL Transformations Tag -->
+  <tag>
+    <name>apply</name>
+    <tagclass>org.apache.taglibs.xsl.ApplyTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>
+      Apply the specified stylesheet to the specified XML input, both of
+      which may be acquired in a variety of manners depending upon
+      the optional attributes that are included.  Available attributes:
+
+      nameXml            Name of a bean (in any scope) that defines the
+                         source of the XML data to be transformed.  This
+                         bean must be of one of the following Java classes:
+                         String (containing the XML data itself)
+			 InputSource (SAX input source containing the data)
+			 InputStream (byte stream containing the data)
+			 Node (DOM tree containing the data
+			 Reader (character stream containing the data)
+                         XSLTInputSource (from which the data is read)
+
+      nameXsl            Name of a bean (in any scope) that defines the
+                         source of the XSL stylesheet to be used.  This
+                         bean must be of one of the following Java classes:
+			 String (containing the stylesheet itself)
+			 InputSource (SAX input source containing the
+                           stylesheet)
+                         InputStream (byte stream containing the stylesheet)
+                         Node (DOM tree containing the stylesheet)
+                         Reader (character stream containing the stylesheet)
+                         XSLTInputSource (from which the stylesheet is read)
+
+      propertyXml	 If specified, the bean identified by "nameXml"
+                         is assumed to have a property whose getter method
+                         is called to define the XML data source, instead
+                         of interpreting that bean itself.
+
+      propertyXsl        If specified, the bean identified by "nameXsl"
+                         is assumed to have a property whose getter method
+                         is called to define the XSL stylesheet source, instead
+			 of interpreting that bean itself
+
+      xml                If specified, the context-relative path to an
+                         application resource containing the XML data.
+
+      xsl		 If specified, the context-relative path to an
+                         application resource containing the XSL stylesheet.
+
+      Valid attribute combinations to select the XML data source are:
+      * "nameXml" - The named bean defines the data source.
+      * "nameXml" and "propertyXml" - The named property of the named bean
+        defines the data source.
+      * "xml" - The named resource is read (with getResourceAsStream())
+        to provide the data source.
+      * (none) - The body of this tag is interpreted as the XML data source.
+
+      Valid attribute combinations to select the XSL stylesheet source are:
+      * "nameXsl" - The named bean defines the stylesheet source.
+      * "nameXsl" and "propertyXsl" - The named property of the named bean
+        defines the data source.
+      * "xsl" - The named resource is read (with getResourceAsStream())
+        to provide the data source.
+    </info>
+    <attribute>
+      <name>nameXml</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>nameXsl</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>propertyXml</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>propertyXsl</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>xml</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>xsl</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <!-- Export Tag -->
+  <tag>
+    <name>export</name>
+    <tagclass>org.apache.taglibs.xsl.ExportTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>
+      Export the contents of the specified JSP bean in the specified scope
+      to our output stream, presumably after its contents have been
+      manipulated.  Available attributes:
+
+      name                Name of a JSP bean whose content is to be
+                          rendered to our output stream.
+
+      scope               Scope in which this bean is registered.  If not
+                          specified, page scope is assumed.
+    </info>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <!-- Import Tag -->
+  <tag>
+    <name>import</name>
+    <tagclass>org.apache.taglibs.xsl.ImportTag</tagclass>
+    <teiclass>org.apache.taglibs.xsl.ImportTei</teiclass>
+    <bodycontent>empty</bodycontent>
+    <info>
+      Import the contents of the specified page, and store it as a String
+      in the specified bean and scope.  This tag is useful for assigning the
+      content of XML data (or an XSL stylesheet) to a bean that can later be
+      manipulated with the "apply" tag.  Available attributes:
+
+      id                  Name of a JSP bean to be created containing the
+                          contents of the specified page as a String.
+
+      page                Context-relative URI of the page (or servlet) to
+                          be executed, and whose output should be imported.
+
+      scope               Scope in which the bean specified by "id" will be
+                          created (page, request, session, application).  If
+                          not specified, page scope is assumed.
+    </info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>page</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>scope</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <!-- Include Tag -->
+  <tag>
+    <name>include</name>
+    <tagclass>org.apache.taglibs.xsl.IncludeTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>
+      Include the contents of the specified page.  This tag is similar to
+      &lt;jsp:include&gt;, but causes the included contents to be rendered to
+      our JspWriter (and thus to the body content of any enclosing tag)
+      rather than being sent directly to the output stream.  Available
+      attributes:
+
+      page                Context-relative URI of the page (or servlet) to
+                          be executed, and whose output should be included
+                          at this point.
+    </info>
+    <attribute>
+      <name>page</name>
+      <required>true</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+  <!-- This tag doesn't really belong here -->
+  <tag>
+    <name>ShowSource</name>
+    <tagclass>org.apache.taglibs.xsl.ShowSource</tagclass>
+    <info>
+	Convenience to return Source.
+    </info>
+    <attribute>
+       <name>jspFile</name>
+       <required>true</required>
+       <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+</taglib>
